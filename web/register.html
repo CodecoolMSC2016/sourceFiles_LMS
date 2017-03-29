@@ -3,33 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="style.css" type="text/css"/>
+
     <link rel="stylesheet" href="bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
 
 
 </head>
 <body>
-    <div class="title">
-        <h1>SourceLearn registration page</h1>
-    </div>
+
+    <svg viewBox="0 0 960 300">
+        <symbol id="s-text">
+            <text text-anchor="middle" x="50%" y="80%">Source Learn</text>
+        </symbol>
+
+        <g class = "g-ants">
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+        </g>
+    </svg>
 
     <div class="container">
         <form class="register" action="RegisterHandler" method="post">
 
-            <h2 class="register-heading">Please register</h2>
+            <h3 class="register-heading">Registration page</h3><br>
 
             <label for="inputEmail" class="sr-only">Email address</label>
             <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus><br>
 
             <label for="inputName" class="sr-only">Name</label>
-            <input type="text" id="inputName" class="form-control" name="name" placeholder="Name" required>
+            <input type="text" id="inputName" class="form-control" name="name" placeholder="Name" required><br>
 
-            <input type="radio" name="role" value="mentor">Mentor<br>
+            <input type="radio" name="role" value="mentor">Mentor
             <input type="radio" name="role" value="student" checked>Student<br><br>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-
-
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button><br>
 
         </form>
 
