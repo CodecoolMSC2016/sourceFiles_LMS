@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
 
 /**
  * Created by imre_meszesan on 29.03.17.
  */
-@WebServlet(name = "RegistrationHandler")
+@WebServlet("/RegistrationHandler")
 public class RegistrationHandler extends HttpServlet {
     private DataContainer container;
 
@@ -22,16 +24,15 @@ public class RegistrationHandler extends HttpServlet {
         container = DataContainer.getInstance();
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String mentor = request.getParameter("mentor");
-        String student = request.getParameter("student");
+        String role = request.getParameter("role");
         String email = request.getParameter("email");
         String name = request.getParameter("name");
-        if (mentor.equals("")){
+        if (role.equals("mentor")){
             container.addUser(new Mentor(name, email));
         }else {
             container.addUser(new Student(name, email));
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/register.html");
         dispatcher.forward(request, response);
     }
 
