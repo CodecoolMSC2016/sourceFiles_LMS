@@ -32,6 +32,7 @@ public class ProfileHandler extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher =  request.getRequestDispatcher("/profile.jsp");
         User user = null;
         String newRole = "";
         String name = request.getParameter("changedName");
@@ -49,7 +50,8 @@ public class ProfileHandler extends HttpServlet {
                 newRole = (user instanceof Mentor) ? "Mentor" : "Student";
                 container.addUser(name, email, newRole, abspath);
             }
-        }catch(Exception e){
+        }
+        catch(Exception e){
             e.printStackTrace();
         }
         if(email.equals(user.getEmail())){
@@ -57,7 +59,7 @@ public class ProfileHandler extends HttpServlet {
             request.setAttribute("email", email);
             request.setAttribute("role", newRole);
         }
-        RequestDispatcher dispatcher =  request.getRequestDispatcher("/profile.jsp");
+        else request.setAttribute("wrongEmail", "Wrong e-mail address entered!");
         dispatcher.forward(request, response);
     }
 

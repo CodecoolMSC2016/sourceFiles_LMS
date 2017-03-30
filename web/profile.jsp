@@ -20,6 +20,7 @@
     <div id="content1">
         <div id="popup">
             <form class="register" action="ProfileHandler" method="post">
+                <p style="color: red">${wrongEmail}</p>
                 <input type="text" name="confirmEmail"  class="form-control" placeholder="E-mail address for confirmation" required><br>
                 <input id="name" name="changedName" class="form-control" placeholder="Name" type="text"><br>
                 <p id="pp">Would you change your role? <input type="checkbox" id="changerole" name = "changeRole" value = "true"></p><br>

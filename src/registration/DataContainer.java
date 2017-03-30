@@ -110,8 +110,13 @@ public class DataContainer {
     {
         for (User user:registeredUsers)
         {
-            if (user.getEmail().equals(email)) return user;
+            if (user.getEmail().equals(email))
+            {
+                System.out.println("findUser talalat");
+                return user;
+            }
         }
+        System.out.println("findUser nem talalt");
         throw new EmailNotFoundException("This address isn't registered!");
     }
 
