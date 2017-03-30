@@ -1,3 +1,13 @@
+html {
+    margin: 0;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    outline: none;
+}
 body {
     background: #72B565; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(#30E8BF, #FF8235); /* For Safari 5.1 to 6.0 */
@@ -5,27 +15,142 @@ body {
     background: -moz-linear-gradient(#30E8BF, #FF8235); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#30E8BF, #FF8235); /* Standard syntax */
 }
-.container {
-    margin-top: 50px;
-    width: 450px;
+#title {
+    margin: auto;
+    margin-top: 20px;
+    font-family: Arial;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 65px;
+    filter: blur(3px);
     text-align: center;
-    border-radius: 2%;
-    color: slategrey;
-    background-color: rgba(255,255,255,0.5);
+}
+#text {
+    color: white;
+}
+
+#content {
+    width: 650px;
+    background-color: rgba(255,255,255,0.2);
+    padding: 25px 20px;
+    padding-bottom: 35px;
+    border-radius: 6px;
+    margin: auto;
+    margin-top: 45px;
+
+}
+h1 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 2.5em;
+    line-height: 1.5em;
+    letter-spacing: -0.05em;
+    margin-bottom: 58px;
+    padding: .1em 0;
+    color: #444;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+
+}
+h1:before {
+    left: -.5em;
+    margin: 0 0 0 -50%;
+}
+h1:after {
+    left: .5em;
+    margin: 0 -50% 0 0;
+}
+h1:before, h1:after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    width: 50%;
+    height: 1px;
+    vertical-align: middle;
+    background: #f0f0f0;
+}
+#settings {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: middle;
+    outline: none;
+
+}
+.setting {
+    display: block;
+    font-weight: normal;
+    padding: 7px 3px;
+    border-top: 1px solid #f0f0f0;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+span {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: middle;
+    outline: none;
+    color: #444;
+    float: left;
+    width: 250px;
+    font-weight: bold;
+}
+.setting span {
+    float: left;
+    width: 250px;
+    font-weight: bold;
+}
+p {
+    display: block;
+    font-size: 1.4em;
+    line-height: 1.55em;
+    color: #444;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+#userphoto {
+    display: block;
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 8px;
+}
+img {
+    max-width: 100%;
+    border: 0;
+    cursor: pointer;
 }
 #content1{
     width:100%;
     height:100%;
-    opacity:.95;
+    opacity: .95;
     top:0;
     left:0;
+    margin: 20px;
     display:none;
     position:fixed;
-    overflow:auto
+    overflow:auto;
+    margin: 20px 20px;
 }
-div#popup{
-    position:absolute;
-    left:50%;
-    top:17%;
-    margin-left:-202px;
+#popup{
+    position: absolute;
+    margin: auto;
+    margin-top: 17%;
+    margin-left: 34%;
+    padding: 15px;
+    width: 400px;
+    height: 220px;
+    text-align: center;
+    border-radius: 2%;
+    color: slategrey;
+    background-color: rgba(255,255,255,0.9);
+}
+#pp {
+    font-size: 1em;
 }
