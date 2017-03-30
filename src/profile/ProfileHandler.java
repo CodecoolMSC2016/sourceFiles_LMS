@@ -54,6 +54,8 @@ public class ProfileHandler extends HttpServlet {
                 emailAlreadyExists.printStackTrace();
             }
         }
+        RequestDispatcher dispatcher =  request.getRequestDispatcher("/profile.jsp");
+        dispatcher.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
