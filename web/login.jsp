@@ -19,6 +19,7 @@
   <p>Please log in to your account using your e-mail address and full name!</p>
   <form action="">
     <label for="lemail">E-mail address</label>
+    <p>${emailNotFound}</p>
     <input type="email" name="email" id="lemail" required placeholder="E-mail address"><br>
     <input type="submit">
   </form>

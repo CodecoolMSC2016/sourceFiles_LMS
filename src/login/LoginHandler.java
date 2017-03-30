@@ -2,6 +2,7 @@ package login;
 
 import Users.Mentor;
 import Users.User;
+import login.loginException.EmailNotFoundException;
 import registration.DataContainer;
 
 import javax.servlet.RequestDispatcher;
@@ -22,8 +23,18 @@ public class LoginHandler extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String role;
+        RequestDispatcher disp;
         String email = request.getParameter("email");
-        User loggedIn = DataContainer.getInstance().findUser(email);
+        User loggedIn = null;
+        try
+        {
+            loggedIn = DataContainer.getInstance().findUser(email);
+        } catch (EmailNotFoundException e)
+        {
+            request.setAttribute("emailNotFound",e.getMessage());
+            disp =  request.getRequestDispatcher("/login.jsp");
+            disp.forward(request,response);
+        }
         String userName = loggedIn.getName();
         if (loggedIn instanceof Mentor)
         {
@@ -36,7 +47,7 @@ public class LoginHandler extends HttpServlet
         request.setAttribute("name", userName);
         request.setAttribute("email", email);
         request.setAttribute("role", role);
-        RequestDispatcher disp =  request.getRequestDispatcher("/profile.jsp");
+        disp =  request.getRequestDispatcher("/profile.jsp");
         disp.forward(request,response);
     }
 }
