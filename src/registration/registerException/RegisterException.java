@@ -1,4 +1,4 @@
-package registerException;
+package registration.registerException;
 
 /**
  * Created by Mudzso on 2017.03.29..

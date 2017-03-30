@@ -1,4 +1,6 @@
-import registerException.EmailAlreadyExists;
+package registration;
+
+import registration.registerException.EmailAlreadyExists;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -16,6 +18,7 @@ import java.io.IOException;
 @WebServlet("/RegistrationHandler")
 public class RegistrationHandler extends HttpServlet {
     private DataContainer container;
+    private ServletConfig config;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -26,7 +29,7 @@ public class RegistrationHandler extends HttpServlet {
         String email = request.getParameter("email");
         String name = request.getParameter("name");
 
-        DataContainer container = DataContainer.getInstance();
+        container = DataContainer.getInstance();
 
         try {
             container.addUser(name, email, role);

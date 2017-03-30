@@ -1,7 +1,10 @@
+package registration;
+
 import Users.Mentor;
 import Users.Student;
 import Users.User;
-import registerException.EmailAlreadyExists;
+import login.loginException.EmailNotFoundException;
+import registration.registerException.EmailAlreadyExists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,5 +44,14 @@ public class DataContainer {
 
         }
         return result;
+    }
+    public User findUser(String email) throws EmailNotFoundException
+    {
+        User loggedIn;
+        for (User user:registeredUsers)
+        {
+            if (user.getEmail().equals(email)) return user;
+        }
+        throw new EmailNotFoundException("This address isn't registered!");
     }
 }
