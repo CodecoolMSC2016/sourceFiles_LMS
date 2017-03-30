@@ -15,6 +15,24 @@
 <body>
 <div class="container">
     <h1>${name} 's profile</h1>
+    <div id="content1">
+        <div id="popup">
+            <form action="ProfileHandler" method="post">
+                <input id="name" name="changedName" placeholder="Name" type="text">
+                <button class="btn btn-success" type="submit" onclick="closePopup()">Update</button><br>
+                <p>change your role? <input type="checkbox" id="changerole" name = "changeRole" value = "true"></p>
+            </form>
+        </div>
+    </div>
+    <button id="anyád" onclick="openPopup()">Update information</button>
+    <script>
+        function openPopup() {
+            document.getElementById("content1").style.display = "block";
+        }
+        function closePopup() {
+            document.getElementById("content1").style.display = "none";
+        }
+    </script>
     <div>
         <label>Email address:</label><p>${email}</p>
         <label>Name:</label><p>${name}</p>
