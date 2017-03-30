@@ -1,34 +1,27 @@
 html {
     height: 100%;
 }
-
 body {
 
     font-family: Arial, Helvetica, sans-serif;
     font-size: medium;
 
-    background: midnightblue; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#000428, #004e92); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#000428, #004e92); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#000428, #004e92); /* For Firefox 3.6 to 15 */
-    /*background: linear-gradient(#1F1C2C, #928DAB); /* Standard syntax */
-    background: linear-gradient(#72B565, #588250); /* Standard syntax */
+    background: #72B565; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#30E8BF, #FF8235); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#30E8BF, #FF8235); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#30E8BF, #FF8235); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#30E8BF, #FF8235); /* Standard syntax */
 
 }
-
 .title {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
-
 .container {
-
     margin-top: 50px;
     width: 450px;
     text-align: center;
     border-radius: 2%;
     color: slategrey;
     background-color: rgba(255,255,255,0.5);
-
-
 }
