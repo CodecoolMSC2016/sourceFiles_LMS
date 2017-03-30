@@ -31,17 +31,17 @@
         <img src="style/avatar.png" alt="default avatar">
     </div>
     <h1>
-
+        <h1::before></h1::before>
         ${name}'s profile
-
+        <h1::after></h1::after>
     </h1>
         <section id="settings">
-        <p class="setting"><span>Email address
-        </span> ${email}</p>
-        <p class="setting"><span>Name <img src="style/edit.png" alt="*Edit*" onclick="openPopup()">
-        </span> ${name}</p>
-        <p class="setting"><span>Role <img src="style/edit.png" alt="*Edit*" onclick="openPopup()">
-        </span> ${role}</p>
+        <p class="setting">Email address
+        ${email}</p>
+        <p class="setting">Name <img src="style/edit.png" alt="*Edit*" onclick="openPopup()">
+        ${name}</p>
+        <p class="setting">Role <img src="style/edit.png" alt="*Edit*" onclick="openPopup()">
+        ${role}</p>
         </section>
 </div>
     <script>
