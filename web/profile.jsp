@@ -9,19 +9,21 @@
 <html>
 <head>
     <title>User profile</title>
+    <link rel="stylesheet" href="style/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="style/profilestyle.css"/>
 </head>
 <body>
-<div>
+<div class="container">
     <h1>${name} 's profile</h1>
-</div>
-<div>
-    <h2>Profile details:</h2>
     <div>
-        <p>${email}</p>
-        <p>${name}</p>
-        <p>${role}</p>
+        <label>Email address:</label><p>${email}</p>
+        <label>Name:</label><p>${name}</p>
+        <label>Role:</label><p>${role}</p>
     </div>
     <a href="/login.jsp">Logout</a>
+    <a href="">Edit profile</a>
 </div>
+
 </body>
 </html>
+
