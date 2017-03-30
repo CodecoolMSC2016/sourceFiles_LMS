@@ -42,12 +42,16 @@ public class DataContainer {
 
     public void addUser(String name,String email, String role, String absPath)throws EmailAlreadyExists {
         if (checkEmail(email))throw new EmailAlreadyExists("Email already exists");
-        if(role.equals("mentor")){
+        if(role.toLowerCase().equals("mentor")){
             registeredUsers.add(new Mentor(name,email));
         }else {
             registeredUsers.add(new Student(name,email));
         }
-        Document document = null;
+        saveUser(name, email, role, absPath);
+    }
+
+    private void saveUser(String name, String email, String role, String absPath){
+        Document document;
         try {
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(absPath);
             Element root = document.getDocumentElement();
@@ -63,6 +67,32 @@ public class DataContainer {
             StreamResult result = new StreamResult(absPath);
             transformer.transform(source, result);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteUser(String email, String absPath){
+        Document document;
+        try {
+            document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(absPath);
+            Element root = document.getDocumentElement();
+            NodeList userList = root.getElementsByTagName("user");
+            for (int i = 0; i < userList.getLength(); i++){
+                Node node = userList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE){
+                    Element user = (Element)node;
+                    if(user.getAttribute("email").equals(email)){
+                        root.removeChild(node);
+                        break;
+                    }
+                }
+            }
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Transformer transformer = factory.newTransformer();
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(absPath);
+            transformer.transform(source, result);
         } catch (Exception e) {
             e.printStackTrace();
         }
