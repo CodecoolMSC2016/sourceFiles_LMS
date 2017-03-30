@@ -23,8 +23,8 @@ public class RegistrationHandler extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
+        abspath = getServletContext().getRealPath("/") + "resources/registeredUsers.xml";
         container = DataContainer.getInstance();
-        abspath = "./webapps/sourceFiles_llmmss_war/WEB-INF/classes/registration/registeredUsers.xml";
         container.loadUsers(abspath);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,8 +33,10 @@ public class RegistrationHandler extends HttpServlet {
         String name = request.getParameter("name");
 
         container = DataContainer.getInstance();
-
+        //request.getServletPath()
+        System.out.println(getServletContext().getRealPath("/"));
         try {
+
             container.addUser(name, email, role, abspath);
         } catch (EmailAlreadyExists emailAlreadyExists) {
             request.setAttribute("wrongEmail", emailAlreadyExists.getMessage());
