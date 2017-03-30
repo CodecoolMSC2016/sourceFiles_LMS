@@ -83,11 +83,12 @@ h1:before, h1:after {
 }
 .setting {
     display: block;
-    font-weight: normal;
+    font-weight: bold;
     padding: 7px 3px;
     border-top: 1px solid #f0f0f0;
     margin-bottom: 0px;
     margin-top: 0px;
+
 }
 span {
     margin: 0;
@@ -101,11 +102,7 @@ span {
     float: left;
     width: 250px;
     font-weight: bold;
-}
-.setting span {
-    float: left;
-    width: 250px;
-    font-weight: bold;
+
 }
 p {
     display: block;
