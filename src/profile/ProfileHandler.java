@@ -33,7 +33,7 @@ public class ProfileHandler extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher =  request.getRequestDispatcher("/profile.jsp");
-        User user = null;
+        User user;
         String newRole = "";
         String name = request.getParameter("changedName");
         boolean changeRole = Boolean.parseBoolean(request.getParameter("changeRole"));
@@ -42,24 +42,25 @@ public class ProfileHandler extends HttpServlet {
             user = DataContainer.getInstance().findUser(email);
             container.deleteUser(email, abspath);
             List<User> registeredUsers = container.getRegisteredUsers();
-            registeredUsers.remove(user);
+            if(registeredUsers.remove(user)){
+                System.out.println(registeredUsers.contains(user));
+                System.out.println(registeredUsers.size());
+                System.out.println(registeredUsers.get(0));
+                System.out.println("done");
             if (changeRole){
                 newRole = (user instanceof Mentor) ? "Student" : "Mentor";
                 container.addUser(name, email, newRole, abspath);
             }else{
                 newRole = (user instanceof Mentor) ? "Mentor" : "Student";
                 container.addUser(name, email, newRole, abspath);
-            }
+            }}
         }
         catch(Exception e){
             e.printStackTrace();
         }
-        if(email.equals(user.getEmail())){
-            request.setAttribute("name", name);
-            request.setAttribute("email", email);
-            request.setAttribute("role", newRole);
-        }
-        else request.setAttribute("wrongEmail", "Wrong e-mail address entered!");
+        request.setAttribute("name", name);
+        request.setAttribute("email", email);
+        request.setAttribute("role", newRole);
         dispatcher.forward(request, response);
     }
 
