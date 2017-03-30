@@ -44,4 +44,13 @@ public class DataContainer {
         }
         return result;
     }
+    public User findUser(String email)
+    {
+        User loggedIn;
+        for (User user:registeredUsers)
+        {
+            if (user.getEmail().equals(email)) return user;
+        }
+        return null;
+    }
 }

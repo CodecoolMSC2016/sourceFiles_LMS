@@ -20,9 +20,6 @@
   <form action="">
     <label for="lemail">E-mail address</label>
     <input type="email" name="email" id="lemail" required placeholder="E-mail address"><br>
-    <label for="lname">Full name</label>
-    <input type="text" name="name" id="lname" required placeholder="Full name"><br>
-
     <input type="submit">
   </form>
   <p>don't have an account yet? click <a href="/register.jsp">here</a> to register.</p>
