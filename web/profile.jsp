@@ -36,11 +36,11 @@
         <h1::after></h1::after>
     </h1>
         <section id="settings">
-        <p class="setting">Email address
+        <p class="setting">Email address:
         ${email}</p>
-        <p class="setting">Name <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
+        <p class="setting">Name: <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
         ${name}</p>
-        <p class="setting">Role <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
+        <p class="setting">Role: <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
         ${role}</p>
         </section>
     <a href="./login.jsp">Logout</a>
