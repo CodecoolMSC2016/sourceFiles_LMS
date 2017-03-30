@@ -25,8 +25,9 @@
   </div>
 
   <div class="content">
-    <form action="">
+    <form action="LoginHandler" method="post">
         <br>
+        <p style="color: red;">${emailNotFound}</p>
         <label for="lemail" class="sr-only">E-mail address</label>
         <input type="email" name="email" id="lemail" class="form-control" required placeholder="E-mail address"><br>
 
