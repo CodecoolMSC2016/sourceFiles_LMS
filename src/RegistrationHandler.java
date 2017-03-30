@@ -1,5 +1,6 @@
 import Users.Mentor;
 import Users.Student;
+import Users.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -26,13 +27,16 @@ public class RegistrationHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String role = request.getParameter("role");
         String email = request.getParameter("email");
+        DataContainer container = DataContainer.getInstance();
+
+
         String name = request.getParameter("name");
         if (role.equals("mentor")){
             container.addUser(new Mentor(name, email));
         }else {
             container.addUser(new Student(name, email));
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/register.html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
         dispatcher.forward(request, response);
     }
 
