@@ -12,7 +12,7 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="style/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="style/style.css" type="text/css"/>
+    <link rel="stylesheet" href="style/registerstyle.css" type="text/css"/>
 </head>
 <body>
 <div class="container">
