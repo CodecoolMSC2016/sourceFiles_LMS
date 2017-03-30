@@ -37,7 +37,7 @@ public class DataContainer {
     private boolean checkEmail(String email){
         boolean result = false;
         for (User user:registeredUsers) {
-            if(user.getName().equals(email)) result = true;
+            if(user.getEmail().equals(email)) result = true;
 
         }
         return result;
