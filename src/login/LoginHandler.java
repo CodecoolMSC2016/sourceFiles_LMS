@@ -26,7 +26,7 @@ public class LoginHandler extends HttpServlet
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        abspath = "./webapps/sourceFiles_llmmss_war/WEB-INF/classes/registration/registeredUsers.xml";
+        abspath = getServletContext().getRealPath("/") + "resources/registeredUsers.xml";
         container = DataContainer.getInstance();
         container.loadUsers(abspath);
     }
