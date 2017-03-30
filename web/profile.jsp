@@ -43,6 +43,7 @@
         <p class="setting">Role <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
         ${role}</p>
         </section>
+    <a href="./login.jsp">Logout</a>
 </div>
     <script>
         function openPopup() {
