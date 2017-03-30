@@ -43,10 +43,6 @@ public class ProfileHandler extends HttpServlet {
             container.deleteUser(email, abspath);
             List<User> registeredUsers = container.getRegisteredUsers();
             if(registeredUsers.remove(user)){
-                System.out.println(registeredUsers.contains(user));
-                System.out.println(registeredUsers.size());
-                System.out.println(registeredUsers.get(0));
-                System.out.println("done");
             if (changeRole){
                 newRole = (user instanceof Mentor) ? "Student" : "Mentor";
                 container.addUser(name, email, newRole, abspath);
