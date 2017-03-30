@@ -28,7 +28,7 @@
         </div>
     </div>
     <div id="userphoto">
-        <img src="style/avatar.png" alt="default avatar">
+        <img src="images/avatar.png" alt="default avatar">
     </div>
     <h1>
         <h1::before></h1::before>
@@ -38,11 +38,12 @@
         <section id="settings">
         <p class="setting">Email address
         ${email}</p>
-        <p class="setting">Name <img src="style/edit.png" alt="*Edit*" onclick="openPopup()">
+        <p class="setting">Name <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
         ${name}</p>
-        <p class="setting">Role <img src="style/edit.png" alt="*Edit*" onclick="openPopup()">
+        <p class="setting">Role <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
         ${role}</p>
         </section>
+    <a href="./login.jsp">Logout</a>
 </div>
     <script>
         function openPopup() {
