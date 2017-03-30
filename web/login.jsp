@@ -25,7 +25,7 @@
 
     <input type="submit">
   </form>
-  <p>don't have an account yet? click <a href="/register.html">here</a> to register.</p>
+  <p>don't have an account yet? click <a href="/register.jsp">here</a> to register.</p>
 </div>
 </body>
 </html>
