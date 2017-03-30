@@ -17,10 +17,9 @@
 <body>
 <div class="container">
     <form class="register" action="RegistrationHandler" method="post">
-
         <h3 class="register-heading">Registration page</h3><br>
-        ${wrongEmail}
         <label for="inputEmail" class="sr-only">Email address</label>
+        <p style="color:red; font-size: 10px;">${wrongEmail}</p>
         <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus><br>
 
         <label for="inputName" class="sr-only">Name</label>
@@ -31,7 +30,7 @@
 
         <button class="btn btn-success" type="submit">Register</button><br>
     </form>
-    <p>Already have an account? click <a href="">here</a></p>
+    <p>Already have an account? click <a href="/login.jsp">here</a></p>
 </div> <!-- /container -->
 </body>
 </html>

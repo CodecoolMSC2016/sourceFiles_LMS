@@ -1,4 +1,7 @@
+import Users.Mentor;
+import Users.Student;
 import Users.User;
+import registerException.EmailAlreadyExists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +25,21 @@ public class DataContainer {
         return registeredUsers;
     }
 
-    public void addUser(User user){
-        registeredUsers.add(user);
+    public void addUser(String name,String email, String role)throws EmailAlreadyExists {
+        if (checkEmail(email))throw new EmailAlreadyExists("Email already exists");
+        if(role.equals("mentor")){
+            registeredUsers.add(new Mentor(name,email));
+        }else {
+            registeredUsers.add(new Student(name,email));
+        }
+    }
+
+    private boolean checkEmail(String email){
+        boolean result = false;
+        for (User user:registeredUsers) {
+            if(user.getEmail().equals(email)) result = true;
+
+        }
+        return result;
     }
 }
