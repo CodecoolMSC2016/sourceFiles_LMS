@@ -1,4 +1,6 @@
-import registerException.EmailAlreadyExists;
+package registration;
+
+import registration.registerException.EmailAlreadyExists;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;

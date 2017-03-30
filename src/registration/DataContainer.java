@@ -1,7 +1,9 @@
+package registration;
+
 import Users.Mentor;
 import Users.Student;
 import Users.User;
-import registerException.EmailAlreadyExists;
+import registration.registerException.EmailAlreadyExists;
 
 import java.util.ArrayList;
 import java.util.List;
