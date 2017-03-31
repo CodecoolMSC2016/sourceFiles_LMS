@@ -8,24 +8,23 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import registration.registerException.EmailAlreadyExists;
 
+import java.util.HashSet;
+import java.util.List;
+import registration.registerException.EmailAlreadyExists;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by Mudzso on 2017.03.29..
  */
 public class DataContainer {
-    private List<User>registeredUsers;
+    private Set<User> registeredUsers;
     private static DataContainer ourInstance = new DataContainer();
 
     public static DataContainer getInstance() {
@@ -33,10 +32,10 @@ public class DataContainer {
     }
 
     private DataContainer() {
-        registeredUsers = new ArrayList<>();
+        registeredUsers = new HashSet<>();
     }
 
-    public List<User> getRegisteredUsers() {
+    public Set<User> getRegisteredUsers() {
         return registeredUsers;
     }
 
@@ -66,7 +65,6 @@ public class DataContainer {
             DOMSource source = new DOMSource(document);
             StreamResult result = new StreamResult(absPath);
             transformer.transform(source, result);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,9 +129,6 @@ public class DataContainer {
                     String name = user.getAttribute("name");
                     String email = user.getAttribute("email");
                     String role = user.getAttribute("role");
-                    System.out.println(name);
-                    System.out.println(email);
-                    System.out.println(role);
                     if (role.equals("mentor")){
                         registeredUsers.add(new Mentor(name, email));
                     }else {

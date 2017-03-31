@@ -49,11 +49,11 @@ public class LoginHandler extends HttpServlet
         String userName = loggedIn.getName();
         if (loggedIn instanceof Mentor)
         {
-            role = "Mentor";
+            role = "mentor";
         }
         else
         {
-            role = "Student";
+            role = "student";
         }
         request.setAttribute("name", userName);
         request.setAttribute("email", email);

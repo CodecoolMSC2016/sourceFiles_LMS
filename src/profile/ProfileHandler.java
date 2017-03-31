@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by imre_meszesan on 30.03.17.
@@ -41,15 +42,16 @@ public class ProfileHandler extends HttpServlet {
         try{
             user = DataContainer.getInstance().findUser(email);
             container.deleteUser(email, abspath);
-            List<User> registeredUsers = container.getRegisteredUsers();
+            Set<User> registeredUsers = container.getRegisteredUsers();
             if(registeredUsers.remove(user)){
-            if (changeRole){
-                newRole = (user instanceof Mentor) ? "Student" : "Mentor";
-                container.addUser(name, email, newRole, abspath);
-            }else{
-                newRole = (user instanceof Mentor) ? "Mentor" : "Student";
-                container.addUser(name, email, newRole, abspath);
-            }}
+                if (changeRole){
+                    newRole = (user instanceof Mentor) ? "student" : "mentor";
+                    container.addUser(name, email, newRole, abspath);
+                }else{
+                    newRole = (user instanceof Mentor) ? "mentor" : "student";
+                    container.addUser(name, email, newRole, abspath);
+                }
+            }
         }
         catch(Exception e){
             e.printStackTrace();

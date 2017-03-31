@@ -44,8 +44,7 @@ public abstract class User {
 
         User user = (User) o;
 
-        if (!name.equals(user.name)) return false;
-        return email.equals(user.email);
+        return user.getEmail().equals(getEmail());
     }
 
     @Override

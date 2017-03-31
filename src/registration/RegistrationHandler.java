@@ -25,18 +25,14 @@ public class RegistrationHandler extends HttpServlet {
         super.init(config);
         abspath = getServletContext().getRealPath("/") + "resources/registeredUsers.xml";
         container = DataContainer.getInstance();
-        container.loadUsers(abspath);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String role = request.getParameter("role");
+        String role = request.getParameter("role").toLowerCase();
         String email = request.getParameter("email");
         String name = request.getParameter("name");
 
         container = DataContainer.getInstance();
-        //request.getServletPath()
-        System.out.println(getServletContext().getRealPath("/"));
         try {
-
             container.addUser(name, email, role, abspath);
         } catch (EmailAlreadyExists emailAlreadyExists) {
             request.setAttribute("wrongEmail", emailAlreadyExists.getMessage());
