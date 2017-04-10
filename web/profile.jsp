@@ -18,7 +18,8 @@
     String email = null;
     String role = null;
 
-    if(session == null && request.getCookies() == null) {
+
+    if((session == null || session.getAttribute("userName") == null) && request.getCookies() == null) {
         response.sendRedirect("login.jsp");
     }
     else if(session == null) {
@@ -34,12 +35,25 @@
                 role = cookie.getValue();
             }
         }
+
     }
     else {
         name = (String)session.getAttribute("name");
         email = (String)session.getAttribute("email");
         role = (String)session.getAttribute("role");
     }
+    if (name == null){
+    response.sendRedirect("login.jsp");
+}
+
+//    String name = null;
+//    String email = null;
+//    String role = null;
+//
+//    if((session.getAttribute("userName") == null)) {
+//        out.println("<h1>SESSION DELETED</h1>");
+//    }
+
 %>
     <div id="title">
         <div id="text">source learn</div>
@@ -71,7 +85,9 @@
         <p class="setting">Role: <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
             <%=role%></p>
         </section>
-    <a href="./login.jsp">Logout</a>
+    <form action="/LogoutHandler" method="GET">
+        <input type="submit" value="Logout">
+    </form>
 </div>
     <script>
         function openPopup() {
