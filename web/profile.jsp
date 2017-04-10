@@ -17,7 +17,7 @@
     String name = null;
     String email = null;
     String role = null;
-    //allow access only if session exists
+
     if(session == null && request.getCookies() == null) {
         response.sendRedirect("login.jsp");
     }
@@ -60,7 +60,7 @@
     </div>
     <h1>
         <h1::before></h1::before>
-        ${name}'s profile
+        <%=name%>'s profile
         <h1::after></h1::after>
     </h1>
         <section id="settings">
