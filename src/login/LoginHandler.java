@@ -46,6 +46,7 @@ public class LoginHandler extends HttpServlet
             disp.forward(request,response);
         }
         String userName = loggedIn.getName();
+        userName = userName.replaceAll(" ", ":");
         if (loggedIn instanceof Mentor)
         {
             role = "mentor";
