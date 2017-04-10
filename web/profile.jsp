@@ -53,5 +53,19 @@
             document.getElementById("content1").style.display = "none";
         }
     </script>
+<%
+    String name;
+    String email;
+    String role;
+
+    if(session == null && request.getCookies() == null) {
+        response.sendRedirect("login.jsp");
+    }
+    else {
+        name = (String)session.getAttribute("name");
+        email = (String)session.getAttribute("email");
+        role = (String)session.getAttribute("role");
+    }
+%>
 </body>
 </html>
