@@ -13,6 +13,34 @@
     <link rel="stylesheet" href="style/profilestyle.css"/>
 </head>
 <body>
+<%
+    String name = null;
+    String email = null;
+    String role = null;
+    //allow access only if session exists
+    if(session == null && request.getCookies() == null) {
+        response.sendRedirect("login.jsp");
+    }
+    else if(session == null) {
+        Cookie [] cookies = request.getCookies();
+        for(Cookie cookie : cookies) {
+            if(cookie.getName().equals("userName")) {
+                name = cookie.getValue();
+            }
+            if(cookie.getName().equals("email")) {
+                email = cookie.getValue();
+            }
+            if(cookie.getName().equals("role")) {
+                role = cookie.getValue();
+            }
+        }
+    }
+    else {
+        name = (String)session.getAttribute("name");
+        email = (String)session.getAttribute("email");
+        role = (String)session.getAttribute("role");
+    }
+%>
     <div id="title">
         <div id="text">source learn</div>
     </div>
@@ -37,11 +65,11 @@
     </h1>
         <section id="settings">
         <p class="setting">Email address:
-        ${email}</p>
+        <%=email%></p>
         <p class="setting">Name: <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
-        ${name}</p>
+            <%=name%></p>
         <p class="setting">Role: <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
-        ${role}</p>
+            <%=role%></p>
         </section>
     <a href="./login.jsp">Logout</a>
 </div>
@@ -54,30 +82,6 @@
         }
     </script>
 
-    <%
-        //allow access only if session exists
-        if(session == null && request.getCookies() == null) {
-            response.sendRedirect("login.jsp");
-        }
-        else if(session == null) {
-            Cookie [] cookies = request.getCookies();
-            for(Cookie cookie : cookies) {
-                if(cookie.getName().equals("userName")) {
-                    String name = cookie.getValue();
-                }
-                if(cookie.getName().equals("email")) {
-                    String email = cookie.getValue();
-                }
-                if(cookie.getName().equals("role")) {
-                    String role = cookie.getValue();
-                }
-            }
-        }
-        else {
-            String name = (String)session.getAttribute("name");
-            String email = (String)session.getAttribute("email");
-            String role = (String)session.getAttribute("role");
-        }
-    %>
+
 </body>
 </html>
