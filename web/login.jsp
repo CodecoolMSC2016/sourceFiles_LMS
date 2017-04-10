@@ -34,7 +34,7 @@
         <button class="btn btn-default" type="submit">Login</button><br>
   </form>
       <hr>
-  <p>You don't have an account yet?<br />Click <a href="/register.jsp">here</a> to register.</p>
+  <p>You don't have an account yet?<br />Click <a href="./register.jsp">here</a> to register.</p>
   </div>
   <div class="background-image"></div>
 </div>

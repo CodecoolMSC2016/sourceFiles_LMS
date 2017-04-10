@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 
 
@@ -18,11 +19,13 @@ import java.io.IOException;
 @WebServlet("/RegistrationHandler")
 public class RegistrationHandler extends HttpServlet {
     private DataContainer container;
-    private ServletConfig config;
+    private String abspath;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
+        abspath = getServletContext().getRealPath("/") + "resources/registeredUsers.xml";
         container = DataContainer.getInstance();
+        container.loadUsers(abspath);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String role = request.getParameter("role");
@@ -30,13 +33,15 @@ public class RegistrationHandler extends HttpServlet {
         String name = request.getParameter("name");
 
         container = DataContainer.getInstance();
-
+        //request.getServletPath()
+        System.out.println(getServletContext().getRealPath("/"));
         try {
-            container.addUser(name, email, role);
+
+            container.addUser(name, email, role, abspath);
         } catch (EmailAlreadyExists emailAlreadyExists) {
             request.setAttribute("wrongEmail", emailAlreadyExists.getMessage());
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./register.jsp");
         dispatcher.forward(request, response);
     }
 

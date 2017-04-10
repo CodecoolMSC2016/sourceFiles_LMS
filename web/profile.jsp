@@ -20,7 +20,7 @@
     <div id="content1">
         <div id="popup">
             <form class="register" action="ProfileHandler" method="post">
-                <input type="text" name="confirmEmail"  class="form-control" placeholder="E-mail address for confirmation" required><br>
+                <input style="visibility: hidden" type="radio" name="confirmEmail"  class="form-control" value="${email}" checked><br>
                 <input id="name" name="changedName" class="form-control" placeholder="Name" type="text"><br>
                 <p id="pp">Would you change your role? <input type="checkbox" id="changerole" name = "changeRole" value = "true"></p><br>
                 <button class="btn btn-success" type="submit" onclick="closePopup()">Update</button>
