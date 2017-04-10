@@ -28,7 +28,6 @@ public class ProfileHandler extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        RequestDispatcher dispatcher =  request.getRequestDispatcher("/profile.jsp");
         User user;
         String newRole = "";
         String name = request.getParameter("changedName");
@@ -51,16 +50,11 @@ public class ProfileHandler extends HttpServlet {
         catch(Exception e){
             e.printStackTrace();
         }
-//        request.setAttribute("name", name);
-//        request.setAttribute("email", email);
-//        request.setAttribute("role", newRole);
         HttpSession session = request.getSession(false);
         session.setAttribute("name", name);
         session.setAttribute("email", email);
         session.setAttribute("role", newRole);
         response.sendRedirect("/profile.jsp");
-//        dispatcher.forward(request, response);
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
