@@ -18,7 +18,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArrayList;
+
 
 /**
  * Created by Mudzso on 2017.03.29..
