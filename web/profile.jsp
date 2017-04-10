@@ -53,5 +53,31 @@
             document.getElementById("content1").style.display = "none";
         }
     </script>
+
+    <%
+        //allow access only if session exists
+        if(session == null && request.getCookies() == null) {
+            response.sendRedirect("login.jsp");
+        }
+        else if(session == null) {
+            Cookie [] cookies = request.getCookies();
+            for(Cookie cookie : cookies) {
+                if(cookie.getName().equals("userName")) {
+                    String name = cookie.getValue();
+                }
+                if(cookie.getName().equals("email")) {
+                    String email = cookie.getValue();
+                }
+                if(cookie.getName().equals("role")) {
+                    String role = cookie.getValue();
+                }
+            }
+        }
+        else {
+            String name = (String)session.getAttribute("name");
+            String email = (String)session.getAttribute("email");
+            String role = (String)session.getAttribute("role");
+        }
+    %>
 </body>
 </html>
