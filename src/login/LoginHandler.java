@@ -9,10 +9,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/LoginHandler")
@@ -31,7 +28,10 @@ public class LoginHandler extends HttpServlet
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
+        Cookie nameCookie;
+        Cookie emailCookie;
+        Cookie roleCookie;
         String role;
         RequestDispatcher disp;
         String email = request.getParameter("email");
@@ -54,10 +54,19 @@ public class LoginHandler extends HttpServlet
         {
             role = "student";
         }
-        request.setAttribute("name", userName);
-        request.setAttribute("email", email);
-        request.setAttribute("role", role);
-        disp =  request.getRequestDispatcher("/profile.jsp");
-        disp.forward(request,response);
+        nameCookie = new Cookie("userName", userName);
+        nameCookie.setMaxAge(60*60);
+        emailCookie = new Cookie("email", email);
+        emailCookie.setMaxAge(60*60);
+        roleCookie = new Cookie("role", role);
+        roleCookie.setMaxAge(60*60);
+        response.addCookie(nameCookie);
+        response.addCookie(emailCookie);
+        response.addCookie(roleCookie);
+        session.setAttribute("name", userName);
+        session.setAttribute("email", email);
+        session.setAttribute("role", role);
+        session.setMaxInactiveInterval(60*30);
+        response.sendRedirect("/profile.jsp");
     }
 }
