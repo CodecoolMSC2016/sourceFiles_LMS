@@ -2,9 +2,7 @@ package profile;
 
 import Users.Mentor;
 import Users.User;
-import login.loginException.EmailNotFoundException;
 import registration.DataContainer;
-import registration.registerException.EmailAlreadyExists;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -14,12 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
-/**
- * Created by imre_meszesan on 30.03.17.
- */
 @WebServlet("/ProfileHandler")
 public class ProfileHandler extends HttpServlet {
     private DataContainer container;

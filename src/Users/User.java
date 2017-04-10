@@ -1,8 +1,5 @@
 package Users;
 
-/**
- * Created by Mudzso on 2017.03.29..
- */
 public abstract class User {
 
      protected String name;
@@ -19,14 +16,6 @@ public abstract class User {
 
     public String getEmail() {
         return email;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     @Override

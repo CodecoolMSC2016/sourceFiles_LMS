@@ -10,7 +10,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.HashSet;
-import java.util.List;
 import registration.registerException.EmailAlreadyExists;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
@@ -19,10 +18,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.util.Set;
 
-
-/**
- * Created by Mudzso on 2017.03.29..
- */
 public class DataContainer {
     private Set<User> registeredUsers;
     private static DataContainer ourInstance = new DataContainer();

@@ -9,13 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 
 
-/**
- * Created by imre_meszesan on 29.03.17.
- */
 @WebServlet("/RegistrationHandler")
 public class RegistrationHandler extends HttpServlet {
     private DataContainer container;
