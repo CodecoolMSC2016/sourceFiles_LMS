@@ -19,7 +19,7 @@
     String role = null;
 
 
-    if((session == null || session.getAttribute("userName") == null) && request.getCookies() == null) {
+    if((session == null || session.getAttribute("name") == null) && request.getCookies() == null) {
         response.sendRedirect("login.jsp");
     }
     else if(session == null) {
@@ -91,6 +91,7 @@
     <form action="/UserListHandler" method="GET">
         <input type="submit" value="User List">
     </form>
+    <a href="curriculum.jsp">Curriculum</a>
 </div>
     <script>
         function openPopup() {
