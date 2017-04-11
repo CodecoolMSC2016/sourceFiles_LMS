@@ -12,5 +12,11 @@
 </head>
 <body>
 <pre>${registeredUsers}</pre>
+<a href="profile.jsp">Profile Page</a>
+<%
+    if(session == null || session.getAttribute("userName") == null){
+        response.sendRedirect("/login.jsp");
+    }
+%>
 </body>
 </html>
