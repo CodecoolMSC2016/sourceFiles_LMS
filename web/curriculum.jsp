@@ -27,6 +27,6 @@
 <div>
     <a href="./profile.jsp">Back to profile page</a>
 </div>
-<p style="visibility: hidden;"><%=role%></p>
+<p id="role" style="visibility: hidden;"><%=role%></p>
 </body>
 </html>
