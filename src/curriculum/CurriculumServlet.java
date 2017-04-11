@@ -27,7 +27,7 @@ public class CurriculumServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        currciculumDataList.add(new Text("csuhaja","Sing fast like a cold ship.",true));
+        currciculumDataList.add(new Text("The gold tastes with punishment, break the lighthouse before it travels.","Sing fast like a cold ship.",true));
         currciculumDataList.add(new Text("Where is the sunny parrot?","Reliable crewmates, to the solar system.",false));
         currciculumDataList.add(new Text("Lads die from desolations like real biscuit eaters.","Dexter gemnas ducunt ad ionicis tormento.",true));
         currciculumDataList.add(new Text("Treasure ho! sail to be breaked.","Amors persuadere, tanquam mirabilis solitudo.",true));
@@ -42,6 +42,17 @@ public class CurriculumServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json");
+        if(request.getSession().getAttribute("role").equals("mentor")){
         objectMapper.writeValue(response.getOutputStream(), currciculumDataList);
+        }else {
+            List<CurrciculumData>templist = new ArrayList<>();
+            for (CurrciculumData data:currciculumDataList) {
+                if (data.isPublished()){
+                    templist.add(data);
+                }
+            }
+            objectMapper.writeValue(response.getOutputStream(),templist);
+        }
+
     }
 }
