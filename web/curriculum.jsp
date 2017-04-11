@@ -10,7 +10,7 @@
 <head>
     <title>Curriculum overview</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/mark.js/8.9.0/jquery.mark.min.js"></script>
+    <%--<script src="https://cdn.jsdelivr.net/mark.js/8.9.0/jquery.mark.min.js"></script>--%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
@@ -22,7 +22,7 @@
     <div class="container">
 
         <div>
-            <h1 class="jumbotron" id="mainheader">Welcome to the Curriculum overview page, NAME.</h1>
+            <h1 class="jumbotron" id="mainheader">Welcome to the Curriculum overview page, ${name}.</h1>
         </div>
         <div class="row">
             <div class="col-md-3"></div>
