@@ -11,6 +11,11 @@
     <title>Curriculum overview</title>
 </head>
 <body>
+<%
+    String role = (String) session.getAttribute("role");
+    if (role != "mentor" || role != "student")
+        response.sendRedirect("./login.jsp");
+%>
     <div>
         <h1 id="mainheader">Welcome to the Curriculum overview page, NAME.</h1>
     </div>
@@ -22,5 +27,6 @@
 <div>
     <a href="./profile.jsp">Back to profile page</a>
 </div>
+<p style="visibility: hidden;"><%=role%></p>
 </body>
 </html>
