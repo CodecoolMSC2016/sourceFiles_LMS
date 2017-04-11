@@ -15,7 +15,8 @@ import java.util.List;
 /**
  * Created by mudzso on 2017.04.11..
  */
-@WebServlet(name = "CurriculumServlet")
+@WebServlet(name = "CurriculumServlet",
+urlPatterns = "/CurriculumServlet")
 public class CurriculumServlet extends HttpServlet {
 
     private List<CurrciculumData>currciculumDataList;
