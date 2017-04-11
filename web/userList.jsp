@@ -14,7 +14,7 @@
 <pre>${registeredUsers}</pre>
 <a href="profile.jsp">Profile Page</a>
 <%
-    if(session == null || session.getAttribute("userName") == null){
+    if(session == null || session.getAttribute("name") == null){
         response.sendRedirect("/login.jsp");
     }
 %>
