@@ -88,6 +88,9 @@
     <form action="/LogoutHandler" method="GET">
         <input type="submit" value="Logout">
     </form>
+    <form action="/UserListHandler" method="GET">
+        <input type="submit" value="User List">
+    </form>
 </div>
     <script>
         function openPopup() {
