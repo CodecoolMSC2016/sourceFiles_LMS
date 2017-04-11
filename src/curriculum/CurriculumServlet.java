@@ -48,13 +48,11 @@ public class CurriculumServlet extends HttpServlet {
                 for (CurrciculumData data :currciculumDataList) {
                     if(data.getId().equals(id)){
                         data.setPublished();
-                        response.sendRedirect("curriculum.jsp");
+                        RequestDispatcher dispatcher =  request.getRequestDispatcher("/curriculum.jsp");
+                        dispatcher.forward(request, response);
                     }
                 }
             }
-        }else{
-            RequestDispatcher dispatcher =  request.getRequestDispatcher("/curriculum.jsp");
-            dispatcher.forward(request, response);
         }
     }
 
