@@ -33,16 +33,24 @@ public class UserListHandler extends HttpServlet {
         Set<User> registeredUsers = container.getRegisteredUsers();
         HttpSession session = request.getSession(false);
         String userRole = (String)session.getAttribute("role");
+
         String usersToDisplay = "";
         if (userRole.equals("mentor")){
             for(User user: registeredUsers){
-                usersToDisplay += user + "\n" + user.getClass().getSimpleName() + "\n";
+                String role = user.getClass().getSimpleName();
+                if (role.equals("mentor")){
+                    usersToDisplay += user.getName() + "\n" + role + "\n";
+                }else {
+                    usersToDisplay += user + "\n" + role + "\n";
+                }
             }
         }else {
             for(User user: registeredUsers){
                 String role = user.getClass().getSimpleName();
                 if (role.equals("Student")){
-                    usersToDisplay += user + "\n" + role + "\n";
+                    usersToDisplay += user.getName() + "\n" + role + "\n";
+                }else{
+                    usersToDisplay += user.getName() + "\n" + role + "\n";
                 }
             }
         }
