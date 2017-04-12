@@ -31,6 +31,10 @@ public class ProfileHandler extends HttpServlet {
         User user;
         String newRole = "";
         String name = request.getParameter("changedName");
+        if (name.equals("")){
+            HttpSession session = request.getSession(false);
+            name = (String)session.getAttribute("name");
+        }
         boolean changeRole = Boolean.parseBoolean(request.getParameter("changeRole"));
         String email = request.getParameter("confirmEmail");
         try{
