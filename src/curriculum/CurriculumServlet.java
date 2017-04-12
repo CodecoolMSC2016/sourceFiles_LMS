@@ -1,8 +1,6 @@
 package curriculum;
 
 import org.codehaus.jackson.map.ObjectMapper;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,64 +39,32 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("doPost called");
         String id;
         boolean doPublish;
 
-        if(request.getParameterMap().containsKey("id")){
-            System.out.println("request containskey");
+        if(request.getParameterMap().containsKey("id")){;
              id = request.getParameter("id");
              doPublish = Boolean.parseBoolean(request.getParameter("doPublish"));
-            System.out.println("doPublish: " + doPublish);
             if(id != null){
-            System.out.println("id not null");
                 for (CurrciculumData data :currciculumDataList) {
                     if(data.getId().equals(id)){
                         if (doPublish){
                             data.setPublished();
                         }else {
-                            System.out.println("data found");
                             int newIndex = Integer.parseInt(request.getParameter("index"));
                             data.setIndex(newIndex);
                         }
-//                        RequestDispatcher dispatcher =  request.getRequestDispatcher("/curriculum.jsp");
-//                        dispatcher.forward(request, response);
                     }
                 }
             }
         }
     }
 
-//    @Override
-//    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        System.out.println("PUT CALLED");
-//        String id;
-//        int index;
-//        boolean indexExists = req.getParameterMap().containsKey("index");
-//        boolean idExists = req.getParameterMap().containsKey("id");
-//        if (idExists && indexExists){
-//            System.out.println("id index exist");
-//            id = req.getParameter("id");
-//            index = Integer.parseInt(req.getParameter("index"));
-//            if (id != null){
-//                for (CurrciculumData data: currciculumDataList){
-//                    if (data.getId().equals(id)){
-//                        System.out.println("found data");
-//                        data.setIndex(index);
-//                        System.out.println(index);
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(currciculumDataList);
-
         currciculumDataList.sort(new CurriculumComparator());
-        System.out.println(currciculumDataList);
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json");
+
         if(request.getSession().getAttribute("role").equals("mentor")){
         objectMapper.writeValue(response.getOutputStream(), currciculumDataList);
         }else {
@@ -115,7 +81,6 @@ public class CurriculumServlet extends HttpServlet {
     private class CurriculumComparator implements Comparator<CurrciculumData>{
         @Override
         public int compare(CurrciculumData data1, CurrciculumData data2) {
-            System.out.println("compare CALLED");
             if (data1.getIndex() > data2.getIndex()){
                 return 1;
             }else if (data2.getIndex() > data1.getIndex()){
