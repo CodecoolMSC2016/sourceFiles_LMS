@@ -27,7 +27,7 @@
         Cookie [] cookies = request.getCookies();
         for(Cookie cookie : cookies) {
             if(cookie.getName().equals("userName")) {
-                name = cookie.getValue();
+                name = cookie.getValue().replace(";", " ");
             }
             if(cookie.getName().equals("email")) {
                 email = cookie.getValue();
@@ -39,13 +39,15 @@
 
     }
     else {
-        name = (String)session.getAttribute("name");
-        email = (String)session.getAttribute("email");
-        role = (String)session.getAttribute("role");
+        if (session.getAttribute("name") == null){
+            response.sendRedirect("login.jsp");
+        }else{
+            name = ((String)session.getAttribute("name")).replace(";", " ");
+            email = (String)session.getAttribute("email");
+            role = (String)session.getAttribute("role");
+        }
     }
-    if (name == null){
-        response.sendRedirect("login.jsp");
-}
+
 
 //    String name = null;
 //    String email = null;
@@ -86,10 +88,10 @@
         <p class="setting">Role: <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
             <%=role%></p>
         </section>
-    <form action="/LogoutHandler" method="GET">
+    <form action="LogoutHandler" method="GET">
         <input type="submit" value="Logout">
     </form>
-    <form action="/UserListHandler" method="GET">
+    <form action="UserListHandler" method="GET">
         <input type="submit" value="User List">
     </form>
     <a href="curriculum.jsp">Curriculum</a>
