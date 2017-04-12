@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
     function loadPage(){
-        $("#postedContents").empty();
+        $("#sortable").empty();
         $.ajax({
             url: "/CurriculumServlet",
             type: "GET",
