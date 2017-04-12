@@ -10,7 +10,7 @@ $(document).ready(function(){
             success: function(data){
                 for (var i = 0; i < data.length; i++){
                     var title = data[i].title;
-                    var htmlString = "<a class=\"list-group-item\">";
+                    var htmlString = "<a title=\"" + data[i].id + "\" class=\"list-group-item\">";
 
                     if ($("#role").text() == "mentor"){
 
@@ -26,7 +26,7 @@ $(document).ready(function(){
                     if (maxScore != undefined){
                         htmlString += maxScore;
                     }
-                    $("#postedContents").append(htmlString);
+                    $("#sortable").append(htmlString);
 
                 }
             }
@@ -38,12 +38,10 @@ $(document).ready(function(){
            $.ajax({
                url: "/CurriculumServlet",
                type: "POST",
-               data: {"id": $(this).attr("title")},
+               data: {"id": $(this).attr("title"), "doPublish": "true"},
            });
             var button = $(this);
-            console.log(1);
             console.log(button.text());
-            console.log(2);
             console.log($(this).text());
 
             if (button.text() == "PUBLISH"){
@@ -54,5 +52,24 @@ $(document).ready(function(){
 
         });
     }
+
+    $( function() {
+        $( "#sortable" ).sortable({
+            update: function() {
+                var order = [];
+                $("#sortable a").each(function(){
+                    // order.push($(this).text() + " at index: " + $(this).index());
+                    $.ajax({
+                        url: "/CurriculumServlet",
+                        type: "POST",
+                        data: {"id": $(this).attr("title"), "index": $(this).index(), "doPublish": "false"}
+                    })
+                });
+                // var positions = order.join(";");
+                // // alert(positions);
+            }
+        });
+        $( "#sortable" ).disableSelection();
+    } );
     loadPage();
 });

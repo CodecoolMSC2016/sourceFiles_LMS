@@ -21,6 +21,7 @@
 
     if((session == null || session.getAttribute("name") == null) && request.getCookies() == null) {
         response.sendRedirect("login.jsp");
+        return;
     }
     else if(session == null) {
         Cookie [] cookies = request.getCookies();
@@ -43,7 +44,7 @@
         role = (String)session.getAttribute("role");
     }
     if (name == null){
-    response.sendRedirect("login.jsp");
+        response.sendRedirect("login.jsp");
 }
 
 //    String name = null;

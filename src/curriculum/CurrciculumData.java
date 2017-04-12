@@ -11,11 +11,13 @@ public abstract class CurrciculumData {
     private String text;
     private boolean published;
     private String id;
+    private int index;
 
-    public CurrciculumData(String title, String text, boolean published) {
+    public CurrciculumData(String title, String text, boolean published, int index) {
         this.title = title;
         this.text = text;
         this.published = published;
+        this.index = index;
         id = UUID.randomUUID().toString();
     }
 
@@ -37,5 +39,21 @@ public abstract class CurrciculumData {
 
     public void setPublished(){
         published = !published;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    @Override
+    public String toString() {
+        return "CurrciculumData{" +
+                "title='" + title + '\'' +
+                ", index=" + index +
+                '}';
     }
 }

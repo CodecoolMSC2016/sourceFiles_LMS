@@ -5,7 +5,7 @@ package curriculum;
  */
 public class Text extends CurrciculumData {
 
-    public Text(String title, String text, boolean published) {
-        super(title, text, published);
+    public Text(String title, String text, boolean published, int index) {
+        super(title, text, published, index);
     }
 }
