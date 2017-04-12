@@ -41,18 +41,23 @@ public class CurriculumServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("doPost called");
         String id;
         boolean doPublish;
 
         if(request.getParameterMap().containsKey("id")){
+            System.out.println("request containskey");
              id = request.getParameter("id");
              doPublish = Boolean.parseBoolean(request.getParameter("doPublish"));
+            System.out.println("doPublish: " + doPublish);
             if(id != null){
+            System.out.println("id not null");
                 for (CurrciculumData data :currciculumDataList) {
                     if(data.getId().equals(id)){
                         if (doPublish){
                             data.setPublished();
                         }else {
+                            System.out.println("data found");
                             int newIndex = Integer.parseInt(request.getParameter("index"));
                             data.setIndex(newIndex);
                         }
@@ -89,6 +94,7 @@ public class CurriculumServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println(currciculumDataList);
+
         currciculumDataList.sort(new CurriculumComparator());
         System.out.println(currciculumDataList);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -109,6 +115,7 @@ public class CurriculumServlet extends HttpServlet {
     private class CurriculumComparator implements Comparator<CurrciculumData>{
         @Override
         public int compare(CurrciculumData data1, CurrciculumData data2) {
+            System.out.println("compare CALLED");
             if (data1.getIndex() > data2.getIndex()){
                 return 1;
             }else if (data2.getIndex() > data1.getIndex()){
