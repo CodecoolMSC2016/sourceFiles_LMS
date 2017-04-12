@@ -6,7 +6,7 @@ $(document).ready(function(){
     function loadPage(){
         $("#sortable").empty();
         $.ajax({
-            url: "/CurriculumServlet",
+            url: "CurriculumServlet",
             type: "GET",
             success: function(data){
                 var anchorClass;
@@ -50,7 +50,7 @@ $(document).ready(function(){
         $("button").click(function(){
 
            $.ajax({
-               url: "/CurriculumServlet",
+               url: "CurriculumServlet",
                type: "POST",
                data: {"id": $(this).attr("title"), "doPublish": "true"}
            });
@@ -72,9 +72,9 @@ $(document).ready(function(){
                 $( "#sortable" ).sortable({
                     stop: function() {
                         var order = [];
-                        $("#sortable div").each(function(){
+                        $("#sortable a").each(function(){
                             $.ajax({
-                                url: "/CurriculumServlet",
+                                url: "CurriculumServlet",
                                 type: "POST",
                                 data: {"id": $(this).attr("title"), "index": $(this).index(), "doPublish": "false"}
                             })
