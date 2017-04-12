@@ -23,7 +23,7 @@ $(document).ready(function(){
                     else {
                         anchorClass = "button assignment";
                         type = "Assignment";
-                        scoreSpan = "<span class=\"meta maxscore\">" + data[i].maxScore + "</span>";
+                        scoreSpan = "<div class=\"meta maxscore\">" + data[i].maxScore + "</div>";
 
                     }
 
@@ -35,9 +35,9 @@ $(document).ready(function(){
                     if ($("#role").text() == "mentor"){
 
                         if (!data[i].published){
-                            htmlString += "<button style = \"float: right;\" class = \"btn btn-default btn-xs\" title=\"" + data[i].id + "\">Publish</button></a>";
+                            htmlString += "<div style = \"float: right\"><button class = \"btn btn-default btn-xs publishbutton\" title=\"" + data[i].id + "\">Publish</button></div></a>";
                         }else {
-                            htmlString += "<button style = \"float: right;\" class = \"btn btn-default btn-xs\" title=\"" + data[i].id + "\">Unpublish</button></a>";
+                            htmlString += "<div style = \"float: right\"><button class = \"btn btn-default btn-xs publishbutton\" title=\"" + data[i].id + "\">Unpublish</button></div></a>";
                         }
                     }else {
                         htmlString += "</a>";
