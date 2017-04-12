@@ -2,6 +2,7 @@
  * Created by imre_meszesan on 11.04.17.
  */
 $(document).ready(function(){
+    var pageContets = {};
     function loadPage(){
         $("#sortable").empty();
         $.ajax({
@@ -10,7 +11,8 @@ $(document).ready(function(){
             success: function(data){
                 for (var i = 0; i < data.length; i++){
                     var title = data[i].title;
-                    var htmlString = "<a title=\"" + data[i].id + "\" class=\"list-group-item\">";
+                    var htmlString =
+                        "<a title=\"" + data[i].id + "\" class=\"list-group-item\">";
 
                     if ($("#role").text() == "mentor"){
 
@@ -20,8 +22,9 @@ $(document).ready(function(){
                             htmlString += title + "<button title=\"" + data[i].id + "\">UNPUBLISH</button></a>";
                         }
                     }else {
-                        htmlString += title + "</a>";
+                        htmlString += title + "</a></form>";
                     }
+                    pageContets[data[i].id] = data[i].text;
                     var maxScore = data[i].maxScore;
                     if (maxScore != undefined){
                         htmlString += maxScore;
@@ -30,7 +33,7 @@ $(document).ready(function(){
 
                 }
             }
-        }).then(addButtonEvents);
+        }).then(addButtonEvents).then(makeSortable);
     }
     function addButtonEvents(){
         $("button").click(function(){
@@ -38,7 +41,7 @@ $(document).ready(function(){
            $.ajax({
                url: "/CurriculumServlet",
                type: "POST",
-               data: {"id": $(this).attr("title"), "doPublish": "true"},
+               data: {"id": $(this).attr("title"), "doPublish": "true"}
            });
             var button = $(this);
             console.log(button.text());
@@ -52,24 +55,24 @@ $(document).ready(function(){
 
         });
     }
-
-    $( function() {
-        $( "#sortable" ).sortable({
-            update: function() {
-                var order = [];
-                $("#sortable a").each(function(){
-                    // order.push($(this).text() + " at index: " + $(this).index());
-                    $.ajax({
-                        url: "/CurriculumServlet",
-                        type: "POST",
-                        data: {"id": $(this).attr("title"), "index": $(this).index(), "doPublish": "false"}
-                    })
+    function makeSortable(){
+        if ($("#role").text() == "mentor"){
+            $( function() {
+                $( "#sortable" ).sortable({
+                    stop: function() {
+                        var order = [];
+                        $("#sortable a").each(function(){
+                            $.ajax({
+                                url: "/CurriculumServlet",
+                                type: "POST",
+                                data: {"id": $(this).attr("title"), "index": $(this).index(), "doPublish": "false"}
+                            })
+                        });
+                    }
                 });
-                // var positions = order.join(";");
-                // // alert(positions);
-            }
-        });
-        $( "#sortable" ).disableSelection();
-    } );
+                $( "#sortable" ).disableSelection();
+            } );
+        }
+    }
     loadPage();
 });
