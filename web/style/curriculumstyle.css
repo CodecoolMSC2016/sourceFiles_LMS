@@ -44,7 +44,7 @@ body {
     box-shadow:
             0 .0625em .125em rgba(0, 0, 0, .125),
             inset 0 -.25em 0 -.125em rgba(0, 0, 0, .125),
-            inset 1.2em 0 0 -.7em rgba(0, 95, 210, .5),
+            inset 1.2em 0 0 -.7em rgba(255, 130, 53, .5),
             inset -2em 0 0 -.3em rgba(0, 0, 0, .05);
 }
 
@@ -52,7 +52,7 @@ body {
     box-shadow:
             0 .0625em .125em rgba(0, 0, 0, .125),
             inset 0 -.25em 0 -.125em rgba(0, 0, 0, .125),
-            inset 1.2em 0 0 -.7em rgba(0, 95, 210, .5),
+            inset 1.2em 0 0 -.7em rgba(48, 232, 191, .5),
             inset -2em 0 0 -.3em rgba(0, 0, 0, .05);
 }
 
@@ -78,7 +78,7 @@ body {
 
 .type
  {
-    font-size: .9em;
+    font-size: .7em;
     line-height: 2; /* 16 "px" */
 }
 
