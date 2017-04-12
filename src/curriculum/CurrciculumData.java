@@ -49,11 +49,5 @@ public abstract class CurrciculumData {
         this.index = index;
     }
 
-    @Override
-    public String toString() {
-        return "CurrciculumData{" +
-                "title='" + title + '\'' +
-                ", index=" + index +
-                '}';
-    }
+
 }
