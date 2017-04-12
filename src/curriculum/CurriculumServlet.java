@@ -119,9 +119,9 @@ public class CurriculumServlet extends HttpServlet {
             if (data1.getIndex() > data2.getIndex()){
                 return 1;
             }else if (data2.getIndex() > data1.getIndex()){
-                return 0;
-            }else {
                 return -1;
+            }else {
+                return 0;
             }
         }
     }
