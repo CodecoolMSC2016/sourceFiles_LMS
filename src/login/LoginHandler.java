@@ -68,6 +68,6 @@ public class LoginHandler extends HttpServlet
         session.setAttribute("email", email);
         session.setAttribute("role", role);
         session.setMaxInactiveInterval(60*30);
-        response.sendRedirect("/profile.jsp");
+        response.sendRedirect("./profile.jsp");
     }
 }

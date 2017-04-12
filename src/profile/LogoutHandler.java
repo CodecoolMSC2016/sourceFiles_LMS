@@ -25,7 +25,7 @@ public class LogoutHandler extends HttpServlet {
             session.invalidate();
             session.setMaxInactiveInterval(1);
 
-            response.sendRedirect("/login.jsp");
+            response.sendRedirect("./login.jsp");
         }
     }
 }
