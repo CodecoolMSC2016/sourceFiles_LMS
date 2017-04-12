@@ -35,9 +35,9 @@ $(document).ready(function(){
                     if ($("#role").text() == "mentor"){
 
                         if (!data[i].published){
-                            htmlString += "<div class=\"meta maxscore\" ><button style = \"float: right;\" class = \"btn btn-default btn-xs\" title=\"" + data[i].id + "\">Publish</button></div></a>";
+                            htmlString += "<div style = \"float: right\"><button class = \"btn btn-default btn-xs publishbutton\" title=\"" + data[i].id + "\">Publish</button></div></a>";
                         }else {
-                            htmlString += "<div class=\"meta maxscore\" ><button style = \"float: right;\" class = \"btn btn-default btn-xs\" title=\"" + data[i].id + "\">Unpublish</button></div></a>";
+                            htmlString += "<div style = \"float: right\"><button class = \"btn btn-default btn-xs publishbutton\" title=\"" + data[i].id + "\">Unpublish</button></div></a>";
                         }
                     }else {
                         htmlString += "</a>";
