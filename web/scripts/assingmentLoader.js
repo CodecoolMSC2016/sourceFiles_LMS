@@ -23,30 +23,23 @@ $(document).ready(function(){
                     else {
                         anchorClass = "button assignment";
                         type = "Assignment";
-                        scoreSpan = "<div class=\"meta maxscore\">" + data[i].maxScore + "</div>";
+                        scoreSpan = "<div title=\"" + data[i].id + "\" class=\"meta maxscore\">" + data[i].maxScore + "</div>";
 
                     }
-
                     var htmlString =
                         "<a title=\"" + data[i].id + "\" class=\"" + anchorClass+ "\">" +
                         "<span class = \"title\">" + title + "</span>" +
                         "<span class = \"meta type\">" + type + "</span>" + scoreSpan;
-
                     if ($("#role").text() == "mentor"){
-
+                        var buttonTag = "<button class = \"btn btn-default btn-xs publishbutton\" title=\"" + data[i].id + "\">";
                         if (!data[i].published){
-                            htmlString += "<div style = \"float: right\"><button class = \"btn btn-default btn-xs publishbutton\" title=\"" + data[i].id + "\">Publish</button></div></a>";
+                            htmlString += buttonTag + "Publish</button></a>";
                         }else {
-                            htmlString += "<div style = \"float: right\"><button class = \"btn btn-default btn-xs publishbutton\" title=\"" + data[i].id + "\">Unpublish</button></div></a>";
+                            htmlString += buttonTag + "Unpublish</button></a>";
                         }
-                    }else {
-                        htmlString += "</a>";
                     }
+
                     pageContets[data[i].id] = data[i].text;
-                    var maxScore = data[i].maxScore;
-                    if (maxScore != undefined){
-                        htmlString += maxScore;
-                    }
                     $("#sortable").append(htmlString);
 
                 }
@@ -79,7 +72,7 @@ $(document).ready(function(){
                 $( "#sortable" ).sortable({
                     stop: function() {
                         var order = [];
-                        $("#sortable a").each(function(){
+                        $("#sortable div").each(function(){
                             $.ajax({
                                 url: "/CurriculumServlet",
                                 type: "POST",
