@@ -20,13 +20,14 @@
 <body>
 <%
     String role = (String) session.getAttribute("role");
+    String name = (((String) session.getAttribute("name")).replace(":", " "));
     if (role != "mentor" && role != "student")
         response.sendRedirect("./login.jsp");
 %>
     <div class="container">
 
         <div>
-            <h1 class="jumbotron" id="mainheader">Welcome to the Curriculum overview page, ${name}.</h1>
+            <h1 class="jumbotron" id="mainheader">Welcome to the Curriculum overview page, <%=name%>.</h1>
         </div>
         <div class="row">
             <div class="col-md-3"></div>
@@ -45,6 +46,6 @@
     <p id="role" style="visibility: hidden;"><%=role%></p>
 
     </div>
-<script src="scripts/assingmentLoader.js"></script>
+<script src="./scripts/assingmentLoader.js"></script>
 </body>
 </html>
