@@ -34,7 +34,6 @@
                     <h2 id="assheader">Current assignments:</h2>
                     <div id="sortable" class="list-group">
                     </div>
-                    <p>This p tag should be replicated, it's a link to the future textpage/assignment</p>
                 </div>
                 <div>
                     <a href="./profile.jsp">Back to profile page</a>
