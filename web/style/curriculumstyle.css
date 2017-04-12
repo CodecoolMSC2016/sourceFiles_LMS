@@ -40,7 +40,7 @@ body {
             inset -2em 0 0 -.3em rgba(0, 0, 0, .05);
 }
 
-.teach-me {
+.assignment {
     box-shadow:
             0 .0625em .125em rgba(0, 0, 0, .125),
             inset 0 -.25em 0 -.125em rgba(0, 0, 0, .125),
@@ -48,23 +48,15 @@ body {
             inset -2em 0 0 -.3em rgba(0, 0, 0, .05);
 }
 
-.handyman {
+.textpage {
     box-shadow:
             0 .0625em .125em rgba(0, 0, 0, .125),
             inset 0 -.25em 0 -.125em rgba(0, 0, 0, .125),
-            inset 1em 0 0 -.7em rgba(20, 160, 0, .5),
+            inset 1.2em 0 0 -.7em rgba(0, 95, 210, .5),
             inset -2em 0 0 -.3em rgba(0, 0, 0, .05);
 }
 
-.pick-up-delivery {
-    box-shadow:
-            0 .0625em .125em rgba(0, 0, 0, .125),
-            inset 0 -.25em 0 -.125em rgba(0, 0, 0, .125),
-            inset 1em 0 0 -.7em rgba(210, 15, 0, .5),
-            inset -2em 0 0 -.3em rgba(0, 0, 0, .05);
-}
-
-.item {
+.title {
     font-weight: bold;
     color: #000;
     display: block;
@@ -73,7 +65,7 @@ body {
     overflow: hidden;
 }
 
-.item:after {
+.title:after {
     content: '';
     display: block;
     height: 0;
@@ -84,63 +76,20 @@ body {
     margin-left: .25em;
 }
 
-.category,
-.expiry,
-i {
+.type
+ {
     font-size: .9em;
     line-height: 2; /* 16 "px" */
 }
 
-.expiry {
-    font-weight: bold;
-}
-
-.expiry:before {
-    content: 'ext: ';
-    font-weight: normal;
-}
-
-.cost {
+.maxscore {
     position: absolute;
-    font-family: 'Pathway Gothic One', sans-serif;
+    font-family: sans-serif;
     font-size: 2em;
     right: 1.125em;
     top: 0;
-    margin: auto
+    margin: auto;
     line-height: 2.083; /* 50 "px", should be same as button height */
-}
-
-.clock {
-    display: inline-block;
-    position: relative;
-    width: 1.333em;
-    height: 1.333em;
-    margin-left: .333em;
-    border: .25em solid #95979d;
-    border-radius: 50%;
-    vertical-align: middle;
-}
-
-.clock:before,
-.clock:after {
-    content: '';
-    display: block;
-    position: absolute;
-    width: .125em;
-    height: .25em;
-    background: #95979d;
-}
-
-.clock:before {
-    left: 50%;
-    bottom: 47%;
-    margin-left: -.0625em;
-}
-
-.clock:after {
-    transform: rotate( 135deg );
-    left: 63%;
-    top: 47%;
 }
 
 .chevron {
