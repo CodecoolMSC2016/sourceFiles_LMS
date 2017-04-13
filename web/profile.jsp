@@ -9,8 +9,8 @@
 <html lang="en">
 <head>
     <title>User profile</title>
-    <link rel="stylesheet" href="style/bootstrap.min.css"/>
-    <link rel="stylesheet" href="style/profilestyle.css"/>
+    <link rel="stylesheet" href="./style/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./style/profilestyle.css"/>
 </head>
 <body>
 <%
@@ -20,14 +20,14 @@
 
 
     if((session == null || session.getAttribute("name") == null) && request.getCookies() == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("./login.jsp");
         return;
     }
     else if(session == null) {
         Cookie [] cookies = request.getCookies();
         for(Cookie cookie : cookies) {
             if(cookie.getName().equals("userName")) {
-                name = cookie.getValue().replace(";", " ");
+                name = cookie.getValue().replace(":", " ");
             }
             if(cookie.getName().equals("email")) {
                 email = cookie.getValue();
@@ -40,23 +40,13 @@
     }
     else {
         if (session.getAttribute("name") == null){
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("./login.jsp");
         }else{
-            name = ((String)session.getAttribute("name")).replace(";", " ");
+            name = ((String)session.getAttribute("name")).replace(":", " ");
             email = (String)session.getAttribute("email");
             role = (String)session.getAttribute("role");
         }
     }
-
-
-//    String name = null;
-//    String email = null;
-//    String role = null;
-//
-//    if((session.getAttribute("userName") == null)) {
-//        out.println("<h1>SESSION DELETED</h1>");
-//    }
-
 %>
     <div id="title">
         <div id="text">source learn</div>
@@ -73,7 +63,7 @@
         </div>
     </div>
     <div id="userphoto">
-        <img src="images/avatar.png" alt="default avatar">
+        <img src="./images/avatar.png" alt="default avatar">
     </div>
     <h1>
         <h1::before></h1::before>
@@ -83,9 +73,9 @@
         <section id="settings">
         <p class="setting">Email address:
         <%=email%></p>
-        <p class="setting">Name: <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
+        <p class="setting">Name: <img src="./images/edit.png" alt="*Edit*" onclick="openPopup()">
             <%=name%></p>
-        <p class="setting">Role: <img src="images/edit.png" alt="*Edit*" onclick="openPopup()">
+        <p class="setting">Role: <img src="./images/edit.png" alt="*Edit*" onclick="openPopup()">
             <%=role%></p>
         </section>
     <form action="LogoutHandler" method="GET">
@@ -94,7 +84,7 @@
     <form action="UserListHandler" method="GET">
         <input type="submit" value="User List">
     </form>
-    <a href="curriculum.jsp">Curriculum</a>
+    <a href="./curriculum.jsp">Curriculum</a>
 </div>
     <script>
         function openPopup() {
@@ -104,7 +94,5 @@
             document.getElementById("content1").style.display = "none";
         }
     </script>
-
-
 </body>
 </html>

@@ -10,8 +10,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="style/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="style/loginstyle.css" type="text/css"/>
+    <link rel="stylesheet" href="./style/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="./style/loginstyle.css" type="text/css"/>
 </head>
 <body>
 <div class="bg">
