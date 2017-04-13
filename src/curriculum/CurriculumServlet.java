@@ -42,7 +42,7 @@ public class CurriculumServlet extends HttpServlet {
         String id;
         boolean doPublish;
 
-        if(request.getParameterMap().containsKey("id")){;
+        if(request.getParameterMap().containsKey("id")){
              id = request.getParameter("id");
              doPublish = Boolean.parseBoolean(request.getParameter("doPublish"));
             if(id != null){
