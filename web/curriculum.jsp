@@ -20,10 +20,6 @@
 <body>
 <%
     String role = (String) session.getAttribute("role");
-    if (role != "mentor" && role != "student"){
-        response.sendRedirect("./login.jsp");
-        return;
-    }
     String name = (((String) session.getAttribute("name")).replace(":", " "));
 %>
     <div class="container">
