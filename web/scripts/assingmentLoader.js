@@ -1,7 +1,7 @@
 /**
  * Created by imre_meszesan on 11.04.17.
  */
-$(document).ready(function(){
+$(function(){
     var pageContets = {};
     function loadPage(){
         $("#sortable").empty();
