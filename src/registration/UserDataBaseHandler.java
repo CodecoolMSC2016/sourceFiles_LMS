@@ -3,23 +3,12 @@ package registration;
 import Users.Mentor;
 import Users.Student;
 import Users.User;
-import login.loginException.EmailNotFoundException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import java.sql.*;
 import java.util.HashSet;
-import registration.registerException.EmailAlreadyExists;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.util.Set;
 
-public class DataContainer {
+public class UserDataBaseHandler {
     private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS";
     private static final String DB_USER = "LMSDBManager";
     private static final String DB_PASSWORD = "szupertitkos";
@@ -27,13 +16,13 @@ public class DataContainer {
     private Set<User> registeredUsers;
     private String query = "";
 
-    private static DataContainer ourInstance = new DataContainer();
+    private static UserDataBaseHandler ourInstance = new UserDataBaseHandler();
 
-    public static DataContainer getInstance() {
+    public static UserDataBaseHandler getInstance() {
         return ourInstance;
     }
 
-    private DataContainer(){
+    private UserDataBaseHandler(){
         try {
             connection = getConnection();
         } catch (SQLException e) {
