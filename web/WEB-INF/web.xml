@@ -7,4 +7,18 @@
     <welcome-file-list>
         <welcome-file>/profile.jsp</welcome-file>
     </welcome-file-list>
+
+    <filter>
+        <filter-name>SessionFilter</filter-name>
+        <filter-class>filters.SessionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SessionFilter</filter-name>
+        <url-pattern>/profile.jsp</url-pattern>
+        <url-pattern>/curriculum.jsp</url-pattern>
+        <url-pattern>/userList.jsp</url-pattern>
+        <url-pattern>/profile.jsp</url-pattern>
+        <url-pattern>/textPage.jsp</url-pattern>
+        <!--&lt;!&ndash;<url-pattern>./assingment.jsp</url-pattern>&ndash;&gt;-->
+    </filter-mapping>
 </web-app>
