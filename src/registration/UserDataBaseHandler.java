@@ -31,6 +31,7 @@ public class UserDataBaseHandler {
         registeredUsers = new HashSet<>();
     }
 
+    //Test passed, method seems to work correctly.
     public Set<User> getRegisteredUsers() throws SQLException{
         registeredUsers.clear();
         query = "SELECT * FROM Users";
@@ -53,6 +54,10 @@ public class UserDataBaseHandler {
         return registeredUsers;
     }
 
+    /* Method not working, test failed:
+        "Can not issue data manipulation statements with executeQuery()."
+        0/10 pls fix
+     */
     public void addUser(String name,String email, String role)throws SQLException {
         if(checkEmail(email)) {
             query = "INSERT INTO Users(Name,Email,Role) VAlUES(?,?,?)";
@@ -65,7 +70,10 @@ public class UserDataBaseHandler {
 
     }
 
-
+    /* Method not working, test failed:
+        "Can not issue data manipulation statements with executeQuery()."
+        0/10 pls fix
+     */
     public void updateUser(String email,String name,String role) throws SQLException {
 
         query = "UPDATE Users SET Name = ?, Role = ?  WHERE email = ?";
