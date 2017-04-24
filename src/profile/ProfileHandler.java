@@ -39,7 +39,7 @@ public class ProfileHandler extends HttpServlet {
         String email = request.getParameter("confirmEmail");
         try{
             user = DataContainer.getInstance().findUser(email);
-            container.deleteUser(email, abspath);
+            container.updateUser(email, abspath);
             Set<User> registeredUsers = container.getRegisteredUsers();
             if(registeredUsers.remove(user)){
                 if (changeRole){
