@@ -30,7 +30,7 @@ public class ProfileHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user;
         String newRole = "";
-        String name = request.getParameter("changedName");
+        String name = request.getParameter("changedName").replaceAll(" ", ":");
         if (name.equals("")){
             HttpSession session = request.getSession(false);
             name = (String)session.getAttribute("name");
@@ -39,7 +39,7 @@ public class ProfileHandler extends HttpServlet {
         String email = request.getParameter("confirmEmail");
         try{
             user = DataContainer.getInstance().findUser(email);
-            container.deleteUser(email, abspath);
+            container.updateUser(email, abspath);
             Set<User> registeredUsers = container.getRegisteredUsers();
             if(registeredUsers.remove(user)){
                 if (changeRole){
@@ -58,11 +58,11 @@ public class ProfileHandler extends HttpServlet {
         session.setAttribute("name", name);
         session.setAttribute("email", email);
         session.setAttribute("role", newRole);
-        response.sendRedirect("/profile.jsp");
+        response.sendRedirect("./profile.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher =  request.getRequestDispatcher("/login.jsp");
+        RequestDispatcher dispatcher =  request.getRequestDispatcher("./login.jsp");
         dispatcher.forward(request, response);
     }
 }

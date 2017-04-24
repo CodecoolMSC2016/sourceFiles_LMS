@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <users>
+    <user email="kathona@gmail.com" name="Kathona:Balint" role="student"/>
+    <user email="me@myemail.com" name="Majoros:Firenze" role="mentor"/>
+    <user email="valaki@valaki.com" name="Kallay:Tas" role="student"/>
+    <user email="igen@nem.com" name="Thomas:Miksa" role="mentor"/>
 </users>

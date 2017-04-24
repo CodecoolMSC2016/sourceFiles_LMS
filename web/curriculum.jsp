@@ -20,9 +20,11 @@
 <body>
 <%
     String role = (String) session.getAttribute("role");
-    String name = (((String) session.getAttribute("name")).replace(":", " "));
-    if (role != "mentor" && role != "student")
+    if (role != "mentor" && role != "student"){
         response.sendRedirect("./login.jsp");
+        return;
+    }
+    String name = (((String) session.getAttribute("name")).replace(":", " "));
 %>
     <div class="container">
 

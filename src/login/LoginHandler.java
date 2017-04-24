@@ -42,7 +42,7 @@ public class LoginHandler extends HttpServlet
         } catch (EmailNotFoundException e)
         {
             request.setAttribute("emailNotFound",e.getMessage());
-            disp =  request.getRequestDispatcher("/login.jsp");
+            disp =  request.getRequestDispatcher("./login.jsp");
             disp.forward(request,response);
         }
         String userName = loggedIn.getName();
