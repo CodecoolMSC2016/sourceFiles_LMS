@@ -46,11 +46,12 @@ public class UserListHandler extends HttpServlet {
         String usersToDisplay = "";
         if (userRole.equals("mentor")){
             for(User user: registeredUsers){
+                String userName = user.getName().replaceAll(":", " ");
                 String role = user.getClass().getSimpleName();
                 if (role.equals("mentor")){
                     usersToDisplay += "<div class=\"button " + role + "\">" +
                             "<span class=\"title\">" +
-                            user.getName() + "</span>" +
+                            userName + "</span>" +
                             "<span class=\"meta type\">" +
                             role +
                             "</span></div>";
@@ -58,7 +59,7 @@ public class UserListHandler extends HttpServlet {
                 }else {
                     usersToDisplay += "<div class=\"button " + role + "\">" +
                             "<span class=\"title\">" +
-                            user.getName() + "</span>" +
+                            userName + "</span>" +
                             "<span class=\"meta type\">" +
                             role +
                             "<span class=\"meta expiry\">" +
@@ -70,10 +71,11 @@ public class UserListHandler extends HttpServlet {
         }else {
             for(User user: registeredUsers){
                 String role = user.getClass().getSimpleName();
+                String userName = user.getName().replaceAll(":", " ");
                 if (role.equals("Student")){
                     usersToDisplay += "<div class=\"button " + role + "\">" +
                             "<span class=\"title\">" +
-                            user.getName() + "</span>" +
+                            userName + "</span>" +
                             "<span class=\"meta type\">" +
                             role +
                             "</span></div>";
@@ -81,7 +83,7 @@ public class UserListHandler extends HttpServlet {
             }
         }
         request.setAttribute("registeredUsers", usersToDisplay);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("userList.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./userList.jsp");
         dispatcher.forward(request, response);
     }
 }
