@@ -65,13 +65,14 @@ public class DataContainer {
     }
 
     public void addUser(String name,String email, String role)throws SQLException {
-        query = "INSERT INTO Users(Name,Email,Role) VAlUES(?,?,?)";
-        PreparedStatement ps = connection.prepareStatement(query);
-        ps.setString(1,name);
-        ps.setString(2,email);
-        ps.setString(3,role);
-        ps.executeQuery();
-
+        if(checkEmail(email)) {
+            query = "INSERT INTO Users(Name,Email,Role) VAlUES(?,?,?)";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, role);
+            ps.executeQuery();
+        }
 
     }
 
@@ -91,43 +92,16 @@ public class DataContainer {
 
     private boolean checkEmail(String email){
         boolean result = false;
-
-    }
-    public User findUser(String email) throws EmailNotFoundException
-    {
-        for (User user:registeredUsers)
-        {
-            if (user.getEmail().equals(email))
-            {
-                return user;
-            }
-        }
-        throw new EmailNotFoundException("This address isn't registered!");
-    }
-
-    public void loadUsers(String absPath){
+        Set<User>users = null;
         try {
-            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(absPath);
-            Element root = document.getDocumentElement();
-            NodeList userList = root.getElementsByTagName("user");
-
-            for (int i = 0; i < userList.getLength(); i++){
-                Node node = userList.item(i);
-                if (node.getNodeType() == Node.ELEMENT_NODE){
-                    Element user = (Element)node;
-                    String name = user.getAttribute("name");
-                    String email = user.getAttribute("email");
-                    String role = user.getAttribute("role");
-                    if (role.equals("mentor")){
-                        registeredUsers.add(new Mentor(name, email));
-                    }else {
-                        registeredUsers.add(new Student(name, email));
-                    }
-                }
-            }
-        } catch (Exception e) {
+           users = getRegisteredUsers();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+        for (User user:users) {
+            if(user.getEmail().equals(email))result = true;
+        }
+        return result;
     }
 
     private Connection getConnection() throws SQLException {
