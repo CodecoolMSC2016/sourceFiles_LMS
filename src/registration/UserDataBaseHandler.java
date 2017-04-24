@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserDataBaseHandler {
-    private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS";
+    private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS?useSSL=false";
     private static final String DB_USER = "LMSDBManager";
     private static final String DB_PASSWORD = "szupertitkos";
     private Connection connection;
@@ -24,8 +24,12 @@ public class UserDataBaseHandler {
 
     private UserDataBaseHandler(){
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             connection = getConnection();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e)
+        {
             e.printStackTrace();
         }
         registeredUsers = new HashSet<>();
@@ -52,9 +56,12 @@ public class UserDataBaseHandler {
 
         return registeredUsers;
     }
-
+    /* Method not working, test failed:
+        "Can not issue data manipulation statements with executeQuery()."
+        0/10 pls fix
+     */
     public void addUser(String name,String email, String role)throws SQLException {
-        if(checkEmail(email)) {
+        if(!checkEmail(email)) {
             query = "INSERT INTO Users(Name,Email,Role) VAlUES(?,?,?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, name);
@@ -65,7 +72,10 @@ public class UserDataBaseHandler {
 
     }
 
-
+    /* Method not working, test failed:
+        "Can not issue data manipulation statements with executeQuery()."
+        0/10 pls fix
+     */
     public void updateUser(String email,String name,String role) throws SQLException {
 
         query = "UPDATE Users SET Name = ?, Role = ?  WHERE email = ?";
