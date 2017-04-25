@@ -31,8 +31,6 @@ public class UserDataBaseHandler {
         }
         registeredUsers = new HashSet<>();
     }
-
-    //Test passed, method seems to work correctly.
     public Set<User> getRegisteredUsers() throws SQLException{
         registeredUsers.clear();
         query = "SELECT * FROM Users";
@@ -55,7 +53,6 @@ public class UserDataBaseHandler {
         return registeredUsers;
     }
 
-    // Method works properly 10/10
     public void addUser(String name,String email, String role)throws SQLException, EmailAlreadyExists {
         if(!checkEmail(email)) {
             query = "INSERT INTO Users(Name,Email,Role) VAlUES(?,?,?)";
@@ -69,7 +66,6 @@ public class UserDataBaseHandler {
 
     }
 
-    // Method works properly 10/10
     public void updateUser(String email,String name,String role) throws SQLException {
 
         query = "UPDATE Users SET Name = ?, Role = ?  WHERE email = ?";

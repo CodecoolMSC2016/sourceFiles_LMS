@@ -130,6 +130,7 @@ public class CurriculumDataBaseHandler {
 
     public void switchPublished(String id)throws SQLException{
         boolean published = false;
+
         for (CurrciculumData curriculumData:getCurrciculumDataList()
                 ) {
             if (curriculumData.getId().equals(id)){
@@ -155,6 +156,15 @@ public class CurriculumDataBaseHandler {
 
     }
 
+    public void updateAssignmentPage(String id,String title,String text,int maxScore)throws SQLException{
+        query = "UPDATE AssignmentPage SET Title = ?, Content = ?, MaxScore = ? WHERE ID = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1,title);
+        ps.setString(2,text);
+        ps.setInt(3,maxScore);
+        ps.setString(4,id);
+        ps.executeUpdate();
+    }
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
