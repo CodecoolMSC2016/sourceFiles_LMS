@@ -25,8 +25,12 @@ public class CurriculumDataBaseHandler {
 
     private CurriculumDataBaseHandler() {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             connection = getConnection();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e)
+        {
             e.printStackTrace();
         }
         currciculumDataList = new ArrayList<>();
