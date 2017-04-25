@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Set;
 
 /**
  * Created by imre_meszesan on 24.04.17.
  */
 @WebServlet(name = "TextPageServlet",
-    urlPatterns = "/TextPageServlet"
+    urlPatterns = "/load-text-page"
 )
 public class TextPageServlet extends HttpServlet {
     private DataContainer container;
@@ -34,9 +35,15 @@ public class TextPageServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Set<User> userSet = container.getRegisteredUsers();
+//        Set<User> userSet = null;
+//        try {
+//            userSet = container.getRegisteredUsers();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            response.sendRedirect("./curriculum.jsp");
+//        }
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json");
-        objectMapper.writeValue(response.getOutputStream(), userSet);
+//        objectMapper.writeValue(response.getOutputStream(), userSet);
     }
 }
