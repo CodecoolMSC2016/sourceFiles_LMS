@@ -137,18 +137,18 @@ public class CurriculumDataBaseHandler {
 
         for (CurrciculumData curriculumData:getCurrciculumDataList()
                 ) {
-            if (curriculumData.getId().equals(id)){
+
                 if(curriculumData instanceof Assigment){
                     published = curriculumData.isPublished();
-                    query = "INSERT INTO AssignmentPages(Published) VALUES(?)";
+                    query = "UPDATE AssignmentPages SET = ? WHERE ID = ?";
                 }else if(curriculumData instanceof Text){
                     published = curriculumData.isPublished();
-                    query= "INSERT INTO TextPages(Published) VALUES(?)";
+                    query = "UPDATE TextPages SET = ? WHERE ID = ?";
                 }
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setBoolean(1,!published);
+                ps.setString(2,id);
                 ps.executeUpdate();
-            }
 
         }
 
