@@ -3,6 +3,7 @@ package registration;
 import Users.Mentor;
 import Users.Student;
 import Users.User;
+import registration.registerException.EmailAlreadyExists;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -54,26 +55,21 @@ public class UserDataBaseHandler {
         return registeredUsers;
     }
 
-    /* Method not working, test failed:
-        "Can not issue data manipulation statements with executeQuery()."
-        0/10 pls fix
-     */
-    public void addUser(String name,String email, String role)throws SQLException {
-        if(checkEmail(email)) {
+    // Method works properly 10/10
+    public void addUser(String name,String email, String role)throws SQLException, EmailAlreadyExists {
+        if(!checkEmail(email)) {
             query = "INSERT INTO Users(Name,Email,Role) VAlUES(?,?,?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, name);
             ps.setString(2, email);
             ps.setString(3, role);
-            ps.executeQuery();
+            ps.executeUpdate();
         }
+        else throw new EmailAlreadyExists("Email already exists");
 
     }
 
-    /* Method not working, test failed:
-        "Can not issue data manipulation statements with executeQuery()."
-        0/10 pls fix
-     */
+    // Method works properly 10/10
     public void updateUser(String email,String name,String role) throws SQLException {
 
         query = "UPDATE Users SET Name = ?, Role = ?  WHERE email = ?";
@@ -81,7 +77,7 @@ public class UserDataBaseHandler {
         ps.setString(1,name);
         ps.setString(2,role);
         ps.setString(3,email);
-        ps.executeQuery();
+        ps.executeUpdate();
 
 
 

@@ -18,43 +18,35 @@ import java.util.Set;
 @WebServlet("/ProfileHandler")
 public class ProfileHandler extends HttpServlet {
     private UserDataBaseHandler container;
-    private String abspath;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         container = UserDataBaseHandler.getInstance();
-        abspath = getServletContext().getRealPath("/") + "resources/registeredUsers.xml";
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user;
+        HttpSession session = request.getSession();
         String newRole = "";
         String name = request.getParameter("changedName").replaceAll(" ", ":");
         if (name.equals("")){
-            HttpSession session = request.getSession(false);
+            session = request.getSession(false);
             name = (String)session.getAttribute("name");
         }
         boolean changeRole = Boolean.parseBoolean(request.getParameter("changeRole"));
         String email = request.getParameter("confirmEmail");
         try{
-            user = UserDataBaseHandler.getInstance().findUser(email);
-            container.updateUser(email, abspath);
-            Set<User> registeredUsers = container.getRegisteredUsers();
-            if(registeredUsers.remove(user)){
-                if (changeRole){
-                    newRole = (user instanceof Mentor) ? "student" : "mentor";
-                    container.addUser(name, email, newRole, abspath);
-                }else{
-                    newRole = (user instanceof Mentor) ? "mentor" : "student";
-                    container.addUser(name, email, newRole, abspath);
-                }
+            container.updateUser(email, name, newRole.toLowerCase() );
+            newRole = ((String) session.getAttribute("role"));
+            if (changeRole){
+                newRole = (session.getAttribute("role").equals("Mentor")) ? "student" : "mentor";
             }
+
         }
         catch(Exception e){
             e.printStackTrace();
         }
-        HttpSession session = request.getSession(false);
+        session = request.getSession(false);
         session.setAttribute("name", name);
         session.setAttribute("email", email);
         session.setAttribute("role", newRole);

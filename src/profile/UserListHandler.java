@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,7 +35,15 @@ public class UserListHandler extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Set<User> registeredUsers = container.getRegisteredUsers();
+        Set<User> registeredUsers = null;
+        try
+        {
+            registeredUsers = container.getRegisteredUsers();
+        } catch (SQLException e)
+        {
+            //needs to be handled
+            e.printStackTrace();
+        }
 
         HttpSession session = request.getSession(false);
         String userRole = (String)session.getAttribute("role");
