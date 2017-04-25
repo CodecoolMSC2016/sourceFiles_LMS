@@ -24,7 +24,7 @@ public class CurriculumDataBaseHandler {
     }
 
     private CurriculumDataBaseHandler() {
-        query =
+        //query = commented out as this is empty.
         try {
             connection = getConnection();
         } catch (SQLException e) {
@@ -35,6 +35,7 @@ public class CurriculumDataBaseHandler {
 
     public List<CurrciculumData> getCurrciculumDataList(){
         currciculumDataList.clear();
+        return null;
 
     }
 

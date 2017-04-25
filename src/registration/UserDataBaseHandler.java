@@ -3,6 +3,7 @@ package registration;
 import Users.Mentor;
 import Users.Student;
 import Users.User;
+import registration.registerException.EmailAlreadyExists;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -55,7 +56,7 @@ public class UserDataBaseHandler {
     }
 
     // Method works properly 10/10
-    public void addUser(String name,String email, String role)throws SQLException {
+    public void addUser(String name,String email, String role)throws SQLException, EmailAlreadyExists {
         if(!checkEmail(email)) {
             query = "INSERT INTO Users(Name,Email,Role) VAlUES(?,?,?)";
             PreparedStatement ps = connection.prepareStatement(query);
@@ -64,6 +65,7 @@ public class UserDataBaseHandler {
             ps.setString(3, role);
             ps.executeUpdate();
         }
+        else throw new EmailAlreadyExists("Email already exists");
 
     }
 
