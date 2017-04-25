@@ -134,20 +134,15 @@ public class CurriculumDataBaseHandler {
 
     public void switchPublished(String id)throws SQLException{
         boolean published = false;
+
         for (CurrciculumData curriculumData:getCurrciculumDataList()
                 ) {
             if (curriculumData.getId().equals(id)){
                 if(curriculumData instanceof Assigment){
-                    query = "SELECT Published FROM AssignmentPages";
-                    PreparedStatement ps = connection.prepareStatement(query);
-                    ResultSet rs = ps.executeQuery();
-                    published = rs.getBoolean(1);
+                    published = curriculumData.isPublished();
                     query = "INSERT INTO AssignmentPages(Publised) VALUES(?)";
                 }else if(curriculumData instanceof Text){
-                    query = "SELECT Published FROM TextPages";
-                    PreparedStatement ps = connection.prepareStatement(query);
-                    ResultSet rs = ps.executeQuery();
-                    published = rs.getBoolean(1);
+                    published = curriculumData.isPublished();
                     query= "INSERT INTO TextPages(Published) VALUES(?)";
                 }
                 PreparedStatement ps = connection.prepareStatement(query);
@@ -159,6 +154,36 @@ public class CurriculumDataBaseHandler {
 
     }
 
+    public void updateAssignmentPage(String id,String title,String text,int maxScore)throws SQLException{
+        query = "UPDATE AssignmentPage SET Title = ?, Content = ?, MaxScore = ? WHERE ID = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1,title);
+        ps.setString(2,text);
+        ps.setInt(3,maxScore);
+        ps.setString(4,id);
+        ps.executeUpdate();
+    }
+
+
+    public void updateTextPage(String id,String title,String text)throws SQLException{
+        query = "UPDATE AssignmentPage SET Title = ?, Content = ? WHERE ID = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1,title);
+        ps.setString(2,text);
+        ps.setString(3,id);
+        ps.executeUpdate();
+    }
+
+    public CurrciculumData getCurriculumData(String id){
+        CurrciculumData result = null;
+
+        for (CurrciculumData currciculumData:getCurrciculumDataList()
+             ) {
+            if (currciculumData.getId().equals(id))result = currciculumData;
+            }
+        return result;
+
+    }
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
