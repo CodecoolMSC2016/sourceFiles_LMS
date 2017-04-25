@@ -143,7 +143,7 @@ public class CurriculumDataBaseHandler {
                     query = "INSERT INTO AssignmentPages(Publised) VALUES(?)";
                 }else if(curriculumData instanceof Text){
                     published = curriculumData.isPublished();
-                    query= "INSERT INTO TextPages(Published) VALUES(?)";
+                    query= "INSERT INTO TextPages(Publised) VALUES(?)";
                 }
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setBoolean(1,!published);
