@@ -34,7 +34,7 @@ public class UserDataBaseHandler {
     //Test passed, method seems to work correctly.
     public Set<User> getRegisteredUsers() throws SQLException{
         registeredUsers.clear();
-        query = "SELECT * FROM Users";
+        query = "SELECT * FROM AssignmentPages,TextPages";
         User user = null;
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
@@ -65,7 +65,7 @@ public class UserDataBaseHandler {
             ps.setString(1, name);
             ps.setString(2, email);
             ps.setString(3, role);
-            ps.executeQuery();
+            ps.executeUpdate();
         }
 
     }
@@ -81,7 +81,7 @@ public class UserDataBaseHandler {
         ps.setString(1,name);
         ps.setString(2,role);
         ps.setString(3,email);
-        ps.executeQuery();
+        ps.executeUpdate();
 
 
 
