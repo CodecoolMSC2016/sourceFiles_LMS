@@ -47,7 +47,7 @@ class UserDataBaseHandlerTest
         UserDataBaseHandler udbh = UserDataBaseHandler.getInstance();
         try
         {
-            udbh.updateUser("proba@email.co", "Zsiros Joska", "mentor");
+            udbh.updateUser("proba@email.co", "Zsiros:Joska", "mentor");
         }
         catch(Exception e)
         {
