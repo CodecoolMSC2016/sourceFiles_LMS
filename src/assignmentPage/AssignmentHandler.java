@@ -24,8 +24,15 @@ public class AssignmentHandler extends HttpServlet {
 
     private DataContainer container;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
+        String title = request.getParameter("title");
+        String content = request.getParameter(("content"));
+        int maxScore = Integer.parseInt(request.getParameter("maxScore"));
+
+
+        Assignment assignment = new Assignment(title, content, false, maxScore, index);
 
     }
 
@@ -37,7 +44,6 @@ public class AssignmentHandler extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json");
         objectMapper.writeValue(response.getOutputStream(), assignments);
-
 
     }
 }

@@ -2,7 +2,7 @@
  * Created by trixi on 2017.04.24..
  */
 $(document).ready(function() {
-    $("#assignments").empty();
+    $("#assignment").empty();
     $.ajax({
         url: "AssignmentHandler",
         type: "GET",
@@ -10,6 +10,7 @@ $(document).ready(function() {
             for(var i = 0; i < data.length; i++) {
 
             }
+            $("#assignment").html(data.);
         }
     });
 });
