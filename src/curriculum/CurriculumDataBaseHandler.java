@@ -117,13 +117,13 @@ public class CurriculumDataBaseHandler {
              ) {
             if (curriculumData.getId().equals(id)){
                 if(curriculumData instanceof Assigment){
-                    query = "SELECT Published FROM AssignmentPages";
-                    query = "INSERT INTO AssignmentPages(PosIndex) VALUES(?)";
+                    query = "UPDATE AssignmentPages SET = ? WHERE ID = ?";
                 }else if(curriculumData instanceof Text){
-                    query= "INSERT INTO TextPages(PosIndex) VALUES(?)";
+                    query = "UPDATE TextPages SET = ? WHERE ID = ?";
                 }
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setInt(1,index);
+                ps.setString(2,id);
                 ps.executeUpdate();
             }
 
@@ -137,19 +137,19 @@ public class CurriculumDataBaseHandler {
 
         for (CurrciculumData curriculumData:getCurrciculumDataList()
                 ) {
-            if (curriculumData.getId().equals(id)){
-                if(curriculumData instanceof Assigment){
-                    published = curriculumData.isPublished();
-                    query = "INSERT INTO AssignmentPages(Published) VALUES(?)";
-                }else if(curriculumData instanceof Text){
-                    published = curriculumData.isPublished();
-                    query= "INSERT INTO TextPages(Published) VALUES(?)";
+                if (curriculumData.getId().equals(id)) {
+                    if (curriculumData instanceof Assigment) {
+                        published = curriculumData.isPublished();
+                        query = "UPDATE AssignmentPages SET = ? WHERE ID = ?";
+                    } else if (curriculumData instanceof Text) {
+                        published = curriculumData.isPublished();
+                        query = "UPDATE TextPages SET = ? WHERE ID = ?";
+                    }
+                    PreparedStatement ps = connection.prepareStatement(query);
+                    ps.setBoolean(1, !published);
+                    ps.setString(2, id);
+                    ps.executeUpdate();
                 }
-                PreparedStatement ps = connection.prepareStatement(query);
-                ps.setBoolean(1,!published);
-                ps.executeUpdate();
-            }
-
         }
 
     }
