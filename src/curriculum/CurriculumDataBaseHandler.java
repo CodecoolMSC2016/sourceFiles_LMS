@@ -10,7 +10,7 @@ import java.util.UUID;
  * Created by mudzso on 2017.04.24..
  */
 public class CurriculumDataBaseHandler {
-    private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS";
+    private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS?useSSL=true";
     private static final String DB_USER = "LMSDBManager";
     private static final String DB_PASSWORD = "szupertitkos";
     private Connection connection;
@@ -25,8 +25,12 @@ public class CurriculumDataBaseHandler {
 
     private CurriculumDataBaseHandler() {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             connection = getConnection();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e)
+        {
             e.printStackTrace();
         }
         currciculumDataList = new ArrayList<>();
@@ -45,7 +49,7 @@ public class CurriculumDataBaseHandler {
     }
 
     private void addToListAssigmentPages()throws SQLException{
-        query = "SELECT * FROM AssigmentPages";
+        query = "SELECT * FROM AssignmentPages";
         CurrciculumData currciculumData = null;
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
@@ -83,7 +87,7 @@ public class CurriculumDataBaseHandler {
 
     public void addAssigmentPage(String title,String text,int maxScore)throws SQLException{
         int index = getCurrciculumDataList().size() + 1;
-        query = "INSERT INTO AssigmentPages(ID,PosIndex,Title,Content,MaxScore,Published)" +
+        query = "INSERT INTO AssignmentPages(ID,PosIndex,Title,Content,MaxScore,Published)" +
                 "VALUES(?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1, UUID.randomUUID().toString());
@@ -113,8 +117,8 @@ public class CurriculumDataBaseHandler {
              ) {
             if (curriculumData.getId().equals(id)){
                 if(curriculumData instanceof Assigment){
-                    query = "SELECT Published FROM AssigmentPages";
-                    query = "INSERT INTO AssigmentPages(PosIndex) VALUES(?)";
+                    query = "SELECT Published FROM AssignmentPages";
+                    query = "INSERT INTO AssignmentPages(PosIndex) VALUES(?)";
                 }else if(curriculumData instanceof Text){
                     query= "INSERT INTO TextPages(PosIndex) VALUES(?)";
                 }
@@ -135,11 +139,11 @@ public class CurriculumDataBaseHandler {
                 ) {
             if (curriculumData.getId().equals(id)){
                 if(curriculumData instanceof Assigment){
-                    query = "SELECT Published FROM AssigmentPages";
+                    query = "SELECT Published FROM AssignmentPages";
                     PreparedStatement ps = connection.prepareStatement(query);
                     ResultSet rs = ps.executeQuery();
                     published = rs.getBoolean(1);
-                    query = "INSERT INTO AssigmentPages(Publised) VALUES(?)";
+                    query = "INSERT INTO AssignmentPages(Publised) VALUES(?)";
                 }else if(curriculumData instanceof Text){
                     query = "SELECT Published FROM TextPages";
                     PreparedStatement ps = connection.prepareStatement(query);
