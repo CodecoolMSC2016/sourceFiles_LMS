@@ -3,7 +3,7 @@ package login;
 import Users.Mentor;
 import Users.User;
 import login.loginException.EmailNotFoundException;
-import registration.DataContainer;
+import registration.UserDataBaseHandler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -16,13 +16,13 @@ import java.io.IOException;
 public class LoginHandler extends HttpServlet
 {
     private String abspath;
-    private DataContainer container;
+    private UserDataBaseHandler container;
 
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         abspath = getServletContext().getRealPath("/") + "resources/registeredUsers.xml";
-        container = DataContainer.getInstance();
+        container = UserDataBaseHandler.getInstance();
         container.loadUsers(abspath);
     }
 
@@ -38,7 +38,7 @@ public class LoginHandler extends HttpServlet
         User loggedIn = null;
         try
         {
-            loggedIn = DataContainer.getInstance().findUser(email);
+            loggedIn = UserDataBaseHandler.getInstance().findUser(email);
         } catch (EmailNotFoundException e)
         {
             request.setAttribute("emailNotFound",e.getMessage());

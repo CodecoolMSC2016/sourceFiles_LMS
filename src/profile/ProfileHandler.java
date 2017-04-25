@@ -2,7 +2,7 @@ package profile;
 
 import Users.Mentor;
 import Users.User;
-import registration.DataContainer;
+import registration.UserDataBaseHandler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -17,13 +17,13 @@ import java.util.Set;
 
 @WebServlet("/ProfileHandler")
 public class ProfileHandler extends HttpServlet {
-    private DataContainer container;
+    private UserDataBaseHandler container;
     private String abspath;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        container = DataContainer.getInstance();
+        container = UserDataBaseHandler.getInstance();
         abspath = getServletContext().getRealPath("/") + "resources/registeredUsers.xml";
     }
 
@@ -38,7 +38,7 @@ public class ProfileHandler extends HttpServlet {
         boolean changeRole = Boolean.parseBoolean(request.getParameter("changeRole"));
         String email = request.getParameter("confirmEmail");
         try{
-            user = DataContainer.getInstance().findUser(email);
+            user = UserDataBaseHandler.getInstance().findUser(email);
             container.updateUser(email, abspath);
             Set<User> registeredUsers = container.getRegisteredUsers();
             if(registeredUsers.remove(user)){
