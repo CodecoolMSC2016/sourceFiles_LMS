@@ -1,3 +1,4 @@
+import Users.Mentor;
 import Users.Student;
 import Users.User;
 import org.junit.jupiter.api.Test;
@@ -47,7 +48,26 @@ class UserDataBaseHandlerTest
         UserDataBaseHandler udbh = UserDataBaseHandler.getInstance();
         try
         {
-            udbh.updateUser("proba@email.co", "Zsiros:Joska", "mentor");
+            String email = "proba@email.co";
+            String name = "Zsiros:Joska";
+            String role = "mentor";
+            User updated = null;
+            udbh.updateUser(email, name, role);
+            for (User user:udbh.getRegisteredUsers())
+            {
+                if (user.getEmail().equals(email) && user.getName().equals(name) && user.getClass().getSimpleName().equalsIgnoreCase(role))
+                {
+                    updated = user;
+                }
+            }
+            if (role.equals("mentor"))
+            {
+                assertEquals(new Mentor(name, email), updated);
+            }
+            else
+            {
+                assertEquals(new Student(name,email), updated);
+            }
         }
         catch(Exception e)
         {

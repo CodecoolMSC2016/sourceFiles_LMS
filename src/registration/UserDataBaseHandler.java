@@ -82,9 +82,6 @@ public class UserDataBaseHandler {
         ps.setString(2,role);
         ps.setString(3,email);
         ps.executeUpdate();
-
-
-
     }
 
     private boolean checkEmail(String email){
