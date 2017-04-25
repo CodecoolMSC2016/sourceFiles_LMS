@@ -117,9 +117,9 @@ public class CurriculumDataBaseHandler {
              ) {
             if (curriculumData.getId().equals(id)){
                 if(curriculumData instanceof Assigment){
-                    query = "UPDATE AssignmentPages SET = ? WHERE ID = ?";
+                    query = "UPDATE AssignmentPages SET PosIndex = ? WHERE ID = ?";
                 }else if(curriculumData instanceof Text){
-                    query = "UPDATE TextPages SET = ? WHERE ID = ?";
+                    query = "UPDATE TextPages SET PosIndex = ? WHERE ID = ?";
                 }
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setInt(1,index);
@@ -140,10 +140,10 @@ public class CurriculumDataBaseHandler {
                 if (curriculumData.getId().equals(id)) {
                     if (curriculumData instanceof Assigment) {
                         published = curriculumData.isPublished();
-                        query = "UPDATE AssignmentPages SET = ? WHERE ID = ?";
+                        query = "UPDATE AssignmentPages SET Published = ? WHERE ID = ?";
                     } else if (curriculumData instanceof Text) {
                         published = curriculumData.isPublished();
-                        query = "UPDATE TextPages SET = ? WHERE ID = ?";
+                        query = "UPDATE TextPages SET Published = ? WHERE ID = ?";
                     }
                     PreparedStatement ps = connection.prepareStatement(query);
                     ps.setBoolean(1, !published);
