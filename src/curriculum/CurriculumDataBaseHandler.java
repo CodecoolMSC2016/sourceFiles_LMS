@@ -49,7 +49,7 @@ public class CurriculumDataBaseHandler {
     }
 
     private void addToListAssigmentPages()throws SQLException{
-        query = "SELECT * FROM AssigmentPages";
+        query = "SELECT * FROM AssignmentPages";
         CurrciculumData currciculumData = null;
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
@@ -87,7 +87,7 @@ public class CurriculumDataBaseHandler {
 
     public void addAssigmentPage(String title,String text,int maxScore)throws SQLException{
         int index = getCurrciculumDataList().size() + 1;
-        query = "INSERT INTO AssigmentPages(ID,PosIndex,Title,Content,MaxScore,Published)" +
+        query = "INSERT INTO AssignmentPages(ID,PosIndex,Title,Content,MaxScore,Published)" +
                 "VALUES(?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1, UUID.randomUUID().toString());
@@ -117,8 +117,8 @@ public class CurriculumDataBaseHandler {
              ) {
             if (curriculumData.getId().equals(id)){
                 if(curriculumData instanceof Assigment){
-                    query = "SELECT Published FROM AssigmentPages";
-                    query = "INSERT INTO AssigmentPages(PosIndex) VALUES(?)";
+                    query = "SELECT Published FROM AssignmentPages";
+                    query = "INSERT INTO AssignmentPages(PosIndex) VALUES(?)";
                 }else if(curriculumData instanceof Text){
                     query= "INSERT INTO TextPages(PosIndex) VALUES(?)";
                 }
@@ -138,11 +138,11 @@ public class CurriculumDataBaseHandler {
                 ) {
             if (curriculumData.getId().equals(id)){
                 if(curriculumData instanceof Assigment){
-                    query = "SELECT Published FROM AssigmentPages";
+                    query = "SELECT Published FROM AssignmentPages";
                     PreparedStatement ps = connection.prepareStatement(query);
                     ResultSet rs = ps.executeQuery();
                     published = rs.getBoolean(1);
-                    query = "INSERT INTO AssigmentPages(Publised) VALUES(?)";
+                    query = "INSERT INTO AssignmentPages(Publised) VALUES(?)";
                 }else if(curriculumData instanceof Text){
                     query = "SELECT Published FROM TextPages";
                     PreparedStatement ps = connection.prepareStatement(query);
