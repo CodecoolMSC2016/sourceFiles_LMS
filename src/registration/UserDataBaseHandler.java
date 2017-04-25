@@ -34,7 +34,7 @@ public class UserDataBaseHandler {
     //Test passed, method seems to work correctly.
     public Set<User> getRegisteredUsers() throws SQLException{
         registeredUsers.clear();
-        query = "SELECT * FROM AssignmentPages,TextPages";
+        query = "SELECT * FROM Users";
         User user = null;
         PreparedStatement ps = connection.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
@@ -59,7 +59,7 @@ public class UserDataBaseHandler {
         0/10 pls fix
      */
     public void addUser(String name,String email, String role)throws SQLException {
-        if(checkEmail(email)) {
+        if(!checkEmail(email)) {
             query = "INSERT INTO Users(Name,Email,Role) VAlUES(?,?,?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, name);
