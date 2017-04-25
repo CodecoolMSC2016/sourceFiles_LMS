@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <div>
+                <div id="content">
                     <h2 id="assheader">Current assignments:</h2>
                     <div id="sortable" class="list-group">
                     </div>
