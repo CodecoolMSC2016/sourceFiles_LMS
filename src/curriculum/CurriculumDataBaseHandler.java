@@ -10,7 +10,7 @@ import java.util.UUID;
  * Created by mudzso on 2017.04.24..
  */
 public class CurriculumDataBaseHandler {
-    private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS";
+    private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS?useSSL=true";
     private static final String DB_USER = "LMSDBManager";
     private static final String DB_PASSWORD = "szupertitkos";
     private Connection connection;
