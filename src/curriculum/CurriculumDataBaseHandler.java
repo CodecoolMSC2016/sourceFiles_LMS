@@ -113,12 +113,41 @@ public class CurriculumDataBaseHandler {
              ) {
             if (curriculumData.getId().equals(id)){
                 if(curriculumData instanceof Assigment){
+                    query = "SELECT Published FROM AssigmentPages";
                     query = "INSERT INTO AssigmentPages(PosIndex) VALUES(?)";
                 }else if(curriculumData instanceof Text){
                     query= "INSERT INTO TextPages(PosIndex) VALUES(?)";
                 }
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setInt(1,index);
+                ps.executeUpdate();
+            }
+
+        }
+
+    }
+
+
+    public void switchPublished(String id)throws SQLException{
+        boolean published = false;
+        for (CurrciculumData curriculumData:getCurrciculumDataList()
+                ) {
+            if (curriculumData.getId().equals(id)){
+                if(curriculumData instanceof Assigment){
+                    query = "SELECT Published FROM AssigmentPages";
+                    PreparedStatement ps = connection.prepareStatement(query);
+                    ResultSet rs = ps.executeQuery();
+                    published = rs.getBoolean(1);
+                    query = "INSERT INTO AssigmentPages(Publised) VALUES(?)";
+                }else if(curriculumData instanceof Text){
+                    query = "SELECT Published FROM TextPages";
+                    PreparedStatement ps = connection.prepareStatement(query);
+                    ResultSet rs = ps.executeQuery();
+                    published = rs.getBoolean(1);
+                    query= "INSERT INTO TextPages(Published) VALUES(?)";
+                }
+                PreparedStatement ps = connection.prepareStatement(query);
+                ps.setBoolean(1,!published);
                 ps.executeUpdate();
             }
 
