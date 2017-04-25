@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by mudzso on 2017.04.24..
@@ -33,7 +34,7 @@ public class CurriculumDataBaseHandler {
         {
             e.printStackTrace();
         }
-        currciculumDataList = new ArrayList<>();
+        currciculumDataList = new CopyOnWriteArrayList<>();
     }
 
     public List<CurrciculumData> getCurrciculumDataList(){
