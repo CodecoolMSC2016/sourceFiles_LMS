@@ -1,8 +1,7 @@
 package profile;
 
 import Users.User;
-import org.codehaus.jackson.map.ObjectMapper;
-import registration.DataContainer;
+import registration.UserDataBaseHandler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -13,9 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -25,19 +23,27 @@ import java.util.Set;
     urlPatterns = "/UserListHandler"
 )
 public class UserListHandler extends HttpServlet {
-    DataContainer container;
+    UserDataBaseHandler container;
     Set<User> studentSet;
 
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        container = DataContainer.getInstance();
+        container = UserDataBaseHandler.getInstance();
         studentSet = new HashSet<>();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Set<User> registeredUsers = container.getRegisteredUsers();
+        Set<User> registeredUsers = null;
+        try
+        {
+            registeredUsers = container.getRegisteredUsers();
+        } catch (SQLException e)
+        {
+            //needs to be handled
+            e.printStackTrace();
+        }
 
         HttpSession session = request.getSession(false);
         String userRole = (String)session.getAttribute("role");

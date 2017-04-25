@@ -2,7 +2,7 @@ package profile;
 
 import Users.Mentor;
 import Users.User;
-import registration.DataContainer;
+import registration.UserDataBaseHandler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -17,44 +17,36 @@ import java.util.Set;
 
 @WebServlet("/ProfileHandler")
 public class ProfileHandler extends HttpServlet {
-    private DataContainer container;
-    private String abspath;
+    private UserDataBaseHandler container;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        container = DataContainer.getInstance();
-        abspath = getServletContext().getRealPath("/") + "resources/registeredUsers.xml";
+        container = UserDataBaseHandler.getInstance();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user;
+        HttpSession session = request.getSession();
         String newRole = "";
         String name = request.getParameter("changedName").replaceAll(" ", ":");
         if (name.equals("")){
-            HttpSession session = request.getSession(false);
+            session = request.getSession(false);
             name = (String)session.getAttribute("name");
         }
         boolean changeRole = Boolean.parseBoolean(request.getParameter("changeRole"));
         String email = request.getParameter("confirmEmail");
         try{
-            user = DataContainer.getInstance().findUser(email);
-            container.updateUser(email, abspath);
-            Set<User> registeredUsers = container.getRegisteredUsers();
-            if(registeredUsers.remove(user)){
-                if (changeRole){
-                    newRole = (user instanceof Mentor) ? "student" : "mentor";
-                    container.addUser(name, email, newRole, abspath);
-                }else{
-                    newRole = (user instanceof Mentor) ? "mentor" : "student";
-                    container.addUser(name, email, newRole, abspath);
-                }
+            container.updateUser(email, name, newRole.toLowerCase() );
+            newRole = ((String) session.getAttribute("role"));
+            if (changeRole){
+                newRole = (session.getAttribute("role").equals("Mentor")) ? "student" : "mentor";
             }
+
         }
         catch(Exception e){
             e.printStackTrace();
         }
-        HttpSession session = request.getSession(false);
+        session = request.getSession(false);
         session.setAttribute("name", name);
         session.setAttribute("email", email);
         session.setAttribute("role", newRole);

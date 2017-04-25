@@ -13,12 +13,12 @@ public abstract class CurrciculumData {
     private String id;
     private int index;
 
-    public CurrciculumData(String title, String text, boolean published, int index) {
+    public CurrciculumData(String title, String text, boolean published, int index,String id) {
         this.title = title;
         this.text = text;
         this.published = published;
         this.index = index;
-        id = UUID.randomUUID().toString();
+        this.id = id;
     }
 
     public String getTitle() {

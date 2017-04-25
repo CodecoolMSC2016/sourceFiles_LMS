@@ -78,16 +78,5 @@ public class CurriculumServlet extends HttpServlet {
         }
     }
 
-    private class CurriculumComparator implements Comparator<CurrciculumData>{
-        @Override
-        public int compare(CurrciculumData data1, CurrciculumData data2) {
-            if (data1.getIndex() > data2.getIndex()){
-                return 1;
-            }else if (data2.getIndex() > data1.getIndex()){
-                return -1;
-            }else {
-                return 0;
-            }
-        }
-    }
+
 }

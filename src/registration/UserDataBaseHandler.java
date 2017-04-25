@@ -3,23 +3,13 @@ package registration;
 import Users.Mentor;
 import Users.Student;
 import Users.User;
-import login.loginException.EmailNotFoundException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import registration.registerException.EmailAlreadyExists;
 
 import java.sql.*;
 import java.util.HashSet;
-import registration.registerException.EmailAlreadyExists;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.util.Set;
 
-public class DataContainer {
+public class UserDataBaseHandler {
     private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS";
     private static final String DB_USER = "LMSDBManager";
     private static final String DB_PASSWORD = "szupertitkos";
@@ -27,13 +17,13 @@ public class DataContainer {
     private Set<User> registeredUsers;
     private String query = "";
 
-    private static DataContainer ourInstance = new DataContainer();
+    private static UserDataBaseHandler ourInstance = new UserDataBaseHandler();
 
-    public static DataContainer getInstance() {
+    public static UserDataBaseHandler getInstance() {
         return ourInstance;
     }
 
-    private DataContainer(){
+    private UserDataBaseHandler(){
         try {
             connection = getConnection();
         } catch (SQLException e) {
@@ -42,6 +32,7 @@ public class DataContainer {
         registeredUsers = new HashSet<>();
     }
 
+    //Test passed, method seems to work correctly.
     public Set<User> getRegisteredUsers() throws SQLException{
         registeredUsers.clear();
         query = "SELECT * FROM Users";
@@ -64,19 +55,21 @@ public class DataContainer {
         return registeredUsers;
     }
 
-    public void addUser(String name,String email, String role)throws SQLException {
-        if(checkEmail(email)) {
+    // Method works properly 10/10
+    public void addUser(String name,String email, String role)throws SQLException, EmailAlreadyExists {
+        if(!checkEmail(email)) {
             query = "INSERT INTO Users(Name,Email,Role) VAlUES(?,?,?)";
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, name);
             ps.setString(2, email);
             ps.setString(3, role);
-            ps.executeQuery();
+            ps.executeUpdate();
         }
+        else throw new EmailAlreadyExists("Email already exists");
 
     }
 
-
+    // Method works properly 10/10
     public void updateUser(String email,String name,String role) throws SQLException {
 
         query = "UPDATE Users SET Name = ?, Role = ?  WHERE email = ?";
@@ -84,7 +77,7 @@ public class DataContainer {
         ps.setString(1,name);
         ps.setString(2,role);
         ps.setString(3,email);
-        ps.executeQuery();
+        ps.executeUpdate();
 
 
 
