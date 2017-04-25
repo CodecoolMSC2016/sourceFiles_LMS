@@ -44,7 +44,7 @@ $(function(){
 
                 }
             }
-        }).then(addButtonEvents).then(makeSortable);
+        }).then(addButtonEvents).then(makeSortable).then(addTextPageLinks).then(addAssingmentPageLinks);
     }
     function addButtonEvents(){
         $("button").click(function(){
@@ -84,6 +84,40 @@ $(function(){
                 $( "#sortable" ).disableSelection();
             } );
         }
+    }
+
+    function addTextPageLinks(){
+        $("#sortable a .button.textpage").click(function(){
+           $.ajax({
+               url : "./load-text-page",
+               type: "GET",
+               data: {"id": $(this).attr("title"), "role": $("#role").text()},
+               success: function(data) {
+                   $("#sortable").empty();
+                   $("#content").append(data["text"]);
+                   var link = $("#redirect");
+                   link.attr("href", "./curriculum.jsp");
+                   link.text("Back to Curriculum Page");
+               }
+           });
+        });
+    }
+
+    function addAssingmentPageLinks(){
+        $("#sortable a .button.assignment").click(function(){
+            $.ajax({
+                url : "./load-assignment-page",
+                type: "GET",
+                data: {"id": $(this).attr("title"), "role": $("#role").text()},
+                success: function(data){
+                    $("#sortable").empty();
+                    $("#content").append(data["text"]);
+                    var link = $("#redirect");
+                    link.attr("href", "./curriculum.jsp");
+                    link.text("Back to Curriculum Page");
+                }
+            });
+        });
     }
     loadPage();
 });
