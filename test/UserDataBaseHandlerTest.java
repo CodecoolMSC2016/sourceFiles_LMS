@@ -20,7 +20,11 @@ class UserDataBaseHandlerTest
         UserDataBaseHandler udbh = UserDataBaseHandler.getInstance();
         try{
         Set<User> users = udbh.getRegisteredUsers();
-        assertEquals(4, users.size());
+            for (User user:users)
+            {
+                System.out.println(user.toString());
+            }
+        assertEquals(5, users.size());
         }catch (SQLException exception){
             fail(exception.getMessage());
     }
