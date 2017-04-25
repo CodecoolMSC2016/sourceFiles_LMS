@@ -36,11 +36,11 @@ public class ProfileHandler extends HttpServlet {
         boolean changeRole = Boolean.parseBoolean(request.getParameter("changeRole"));
         String email = request.getParameter("confirmEmail");
         try{
-            container.updateUser(email, name, newRole.toLowerCase() );
             newRole = ((String) session.getAttribute("role"));
             if (changeRole){
-                newRole = (session.getAttribute("role").equals("Mentor")) ? "student" : "mentor";
+                newRole = (session.getAttribute("role").equals("mentor")) ? "student" : "mentor";
             }
+            container.updateUser(email, name, newRole.toLowerCase() );
 
         }
         catch(Exception e){
