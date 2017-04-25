@@ -7,8 +7,8 @@ public class Assigment extends CurrciculumData {
 
     private int maxScore;
 
-    public Assigment(String title, String text, boolean published, int maxScore, int index) {
-        super(title, text, published, index);
+    public Assigment(String title, String text, boolean published, int maxScore, int index,String id) {
+        super(title, text, published, index,id);
         this.maxScore = maxScore;
     }
 
