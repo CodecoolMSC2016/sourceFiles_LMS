@@ -20,22 +20,11 @@ urlPatterns = "/CurriculumServlet")
 public class CurriculumServlet extends HttpServlet {
 
     private List<CurrciculumData>currciculumDataList;
+    private CurriculumDataBaseHandler DBHandler;
 
     public CurriculumServlet() {
+        DBHandler = CurriculumDataBaseHandler.getInstance();
         currciculumDataList = new ArrayList<>();
-    }
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        currciculumDataList.add(new Text("The gold tastes with punishment, break the lighthouse before it travels.","Sing fast like a cold ship.",true, 0));
-        currciculumDataList.add(new Text("Where is the sunny parrot?","Reliable crewmates, to the solar system.",false, 1));
-        currciculumDataList.add(new Text("Lads die from desolations like real biscuit eaters.","Dexter gemnas ducunt ad ionicis tormento.",true, 2));
-        currciculumDataList.add(new Text("Treasure ho! sail to be breaked.","Amors persuadere, tanquam mirabilis solitudo.",true, 3));
-        currciculumDataList.add(new Text("How clear. You vandalize like a skull.","Pol, a bene clabulare, mirabilis zelus!",false, 4));
-        currciculumDataList.add(new Text("Courage is a coal-black doubloons.","Cum canis accelerare, omnes lixaes locus pius, peritus stellaes.",true, 5));
-        currciculumDataList.add(new Assigment("assigment","Cum canis accelerare, omnes lixaes locus pius, peritus stellaes.",true,30, 6));
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
