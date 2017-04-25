@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserDataBaseHandler {
-    private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS";
+    private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS?useSSL=true";
     private static final String DB_USER = "LMSDBManager";
     private static final String DB_PASSWORD = "szupertitkos";
     private Connection connection;
@@ -25,8 +25,12 @@ public class UserDataBaseHandler {
 
     private UserDataBaseHandler(){
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             connection = getConnection();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e)
+        {
             e.printStackTrace();
         }
         registeredUsers = new HashSet<>();
