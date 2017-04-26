@@ -30,15 +30,15 @@ $(function(){
 
                     }
                     var htmlString =
-                        "<form action=" + servletUrl + " method=\"GET\"><li name=\"" + data[i].id + "\" class=\"" + anchorClass+ "\">" +
-                        "<span class = \"title\">" + title + "</span>" +
+                        "<li name=\"" + data[i].id + "\" class=\"" + anchorClass+ "\"><form action=" + servletUrl + " method=\"GET\">" +
+                        "<span class = \"title\">" + title + "</span></form>" +
                         "<span class = \"meta type\">" + type + "</span>" + scoreSpan;
                     if ($("#role").text() == "mentor"){
-                        var buttonTag = "<button class = \"btn btn-default btn-xs publishbutton\" title=\"" + data[i].id + "\">";
+                        var buttonTag = "<button class = \"btn btn-default btn-xs publishbutton\" name=\"" + data[i].id + "\">";
                         if (!data[i].published){
-                            htmlString += buttonTag + "Publish</button></li></form>";
+                            htmlString += buttonTag + "Publish</button></li>";
                         }else {
-                            htmlString += buttonTag + "Unpublish</button></li></form>";
+                            htmlString += buttonTag + "Unpublish</button></li>";
                         }
                     }
 
@@ -75,11 +75,11 @@ $(function(){
                 $( "#sortable" ).sortable({
                     stop: function() {
                         var order = [];
-                        $("#sortable form li").each(function(){
+                        $("#sortable li").each(function(){
                             $.ajax({
                                 url: "CurriculumServlet",
                                 type: "POST",
-                                data: {"id": $(this).attr("name"), "index": $(this).parent().index(), "doPublish": "false"}
+                                data: {"id": $(this).attr("name"), "index": $(this).index(), "doPublish": "false"}
                             })
                         });
                     }
@@ -90,14 +90,14 @@ $(function(){
     }
 
     function addTextPageLinks(){
-        var titles = $("#sortable form li .title");
+        var titles = $("#sortable li form  .title");
         titles.click(function(){
             var inputData = $("<input>")
                 .attr("type", "hidden")
                 .attr("name", "id")
-                .attr("value", $(this).parent().attr("name"));
-            alert($(this).parent().attr("name"));
-            var form = $(this).parent().parent();
+                .attr("value", $(this).parent().parent().attr("name"));
+            alert($(this).parent().parent().attr("name"));
+            var form = $(this).parent();
             form.append(inputData);
             form.submit();
         });
