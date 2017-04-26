@@ -50,7 +50,7 @@ $(function(){
         }).then(addButtonEvents).then(makeSortable).then(addTextPageLinks);
     }
     function addButtonEvents(){
-        $("button").click(function(){
+        $(".publishbutton").click(function(){
 
            $.ajax({
                url: "CurriculumServlet",
@@ -85,7 +85,7 @@ $(function(){
                     }
                 });
                 $( "#sortable" ).disableSelection();
-            } );
+            });
         }
     }
 
@@ -104,6 +104,25 @@ $(function(){
         titles.hover(function(){
             $(this).css('cursor','pointer');
         });
+        addSubmitButtonActions();
     }
+
+    function addSubmitButtonActions(){
+        $("#submitAssignment").click(function(){
+           $.ajax({
+               url: "./testszar",
+               type: "POST",
+               data: {"title": $("#assignmentTitle").val(), "content": $("#assignmentContent").val(), "type": "assignment", "maxScore": $("#assignmentScore").val()}
+           });
+        });
+        $("#submitText").click(function(){
+            $.ajax({
+                url: "./testszar",
+                type: "POST",
+                data: {"title": $("#textTitle").val(), "content": $("#textContent").val(), "type": "text"}
+            });
+        });
+    }
+    $('#collapse1').collapse("hide");
     loadPage();
 });
