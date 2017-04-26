@@ -8,8 +8,10 @@ $(document).ready(function() {
         type: "GET",
         success: function(data) {
             var title = data.title;
+            var content = 
 
-            $("#assignment").html(data.);
+            $("#jumbotron").text(title);
+            $("assignment_content").text(content);
         }
     });
 });

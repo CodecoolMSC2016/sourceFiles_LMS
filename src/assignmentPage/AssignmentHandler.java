@@ -1,10 +1,11 @@
 package assignmentPage;
 
 import Users.User;
+import curriculum.Assigment;
+import curriculum.CurrciculumData;
 import curriculum.CurriculumDataBaseHandler;
 import jdk.nashorn.internal.ir.Assignment;
 import org.codehaus.jackson.map.ObjectMapper;
-import registration.DataContainer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +15,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by trixi on 2017.04.24..
  */
 @WebServlet(name = "AssignmentHandler",
-urlPatterns = "/AssignmentHandler")
+urlPatterns = "/load-assignment-page")
 public class AssignmentHandler extends HttpServlet {
 
-    private CurriculumDataBaseHandler container = CurriculumDataBaseHandler.getInstance();
+    private CurriculumDataBaseHandler dbHandler = CurriculumDataBaseHandler.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,7 +35,7 @@ public class AssignmentHandler extends HttpServlet {
         String content = request.getParameter(("content"));
         int maxScore = Integer.parseInt(request.getParameter("maxScore"));
         try {
-            container.addAssignmentPage(title, content, maxScore);
+            dbHandler.addAssigmentPage(title, content, maxScore);
         }
         catch (SQLException se) {
             throw new RuntimeException(se);
@@ -44,11 +47,21 @@ public class AssignmentHandler extends HttpServlet {
             throws ServletException, IOException {
 
 
-        Assignment assignment = container
+        // Assigment assignment = dbHandler
 
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json");
-        objectMapper.writeValue(response.getOutputStream(), assignment);
+
+        /*
+        if(request.getSession().getAttribute("role").equals("mentor")) {
+            objectMapper.writeValue(response.getOutputStream(), assignment);
+        }
+        else {
+        */
+
+        objectMapper.writeValue(response.getOutputStream(), "mukodik az assignment is");
+
+
 
     }
 }
