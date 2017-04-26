@@ -99,6 +99,7 @@ public class CurriculumDataBaseHandler {
         ps.executeUpdate();
     }
 
+    //Why does it require a maximum score?
     public void addTextPage(String title,String text,int maxScore)throws SQLException{
         int index = getCurrciculumDataList().size() + 1;
         query = "INSERT INTO TextPages(ID,PosIndex,Title,Content,Published)" +
