@@ -35,7 +35,44 @@
                 <div id="content">
                     <h2 id="assheader">Current assignments:</h2>
                     <div id="sortable" class="list-group"></div>
-
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                        Add Text Page</a>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse in" style="text-align:center;">
+                                <div class="panel-body">
+                                    Text Page Title:<br>
+                                    <input id="textTitle" class="input-title" type="text"><br>
+                                    Text Page Content:<br>
+                                    <textarea id="textContent" rows="10" cols="60"></textarea><br>
+                                    <button id="submitText">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" style="text-align:center;">
+                                        Add Assignment Page</a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    Assignment Page Title:<br>
+                                    <input id="assignmentTitle" class="input-title" type="text"><br>
+                                    Assignment Page Content:<br>
+                                    <textarea id="assignmentContent" rows="10" cols="60"></textarea><br>
+                                    Maximum Score:<br>
+                                    <input id="assignmentScore" class="input-title" type="text" placeholder="0"><br>
+                                    <button id="submitAssignment">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <div>
                     <a href="./profile.jsp">Back to profile page</a>
                 </div>
@@ -44,50 +81,7 @@
             <div class="col-md-3"></div>
         </div>
     <p id="role" style="visibility: hidden;"><%=role%></p>
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                            Collapsible Group 1</a>
-                    </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse in">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.</div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                            Collapsible Group 2</a>
-                    </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.</div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                            Collapsible Group 3</a>
-                    </h4>
-                </div>
-                <div id="collapse3" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.</div>
-                </div>
-            </div>
-        </div>
+
     </div>
 <script src="./scripts/assingmentLoader.js"></script>
 </body>
