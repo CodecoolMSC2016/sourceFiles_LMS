@@ -20,10 +20,6 @@
 <body>
 <%
     String role = (String) session.getAttribute("role");
-    if (role != "mentor" && role != "student"){
-        response.sendRedirect("./login.jsp");
-        return;
-    }
     String name = (((String) session.getAttribute("name")).replace(":", " "));
 %>
     <div class="container">
@@ -34,7 +30,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <div>
+                <div id="content">
                     <h2 id="assheader">Current assignments:</h2>
                     <div id="sortable" class="list-group">
                     </div>

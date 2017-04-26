@@ -14,39 +14,10 @@
 </head>
 <body>
 <%
-    String name = null;
-    String email = null;
-    String role = null;
+   String name = ((String)session.getAttribute("name")).replace(":", " ");
+   String email = (String)session.getAttribute("email");
+   String role = (String)session.getAttribute("role");
 
-
-    if((session == null || session.getAttribute("name") == null) && request.getCookies() == null) {
-        response.sendRedirect("./login.jsp");
-        return;
-    }
-    else if(session == null) {
-        Cookie [] cookies = request.getCookies();
-        for(Cookie cookie : cookies) {
-            if(cookie.getName().equals("userName")) {
-                name = cookie.getValue().replace(":", " ");
-            }
-            if(cookie.getName().equals("email")) {
-                email = cookie.getValue();
-            }
-            if(cookie.getName().equals("role")) {
-                role = cookie.getValue();
-            }
-        }
-
-    }
-    else {
-        if (session.getAttribute("name") == null){
-            response.sendRedirect("./login.jsp");
-        }else{
-            name = ((String)session.getAttribute("name")).replace(":", " ");
-            email = (String)session.getAttribute("email");
-            role = (String)session.getAttribute("role");
-        }
-    }
 %>
     <div id="title">
         <div id="text">source learn</div>
