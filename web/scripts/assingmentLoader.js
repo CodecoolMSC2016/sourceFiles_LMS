@@ -30,7 +30,7 @@ $(function(){
 
                     }
                     var htmlString =
-                        "<form action=" + servletUrl + " method=\"GET\"><li title=\"" + data[i].id + "\" class=\"" + anchorClass+ "\">" +
+                        "<form action=" + servletUrl + " method=\"GET\"><li name=\"" + data[i].id + "\" class=\"" + anchorClass+ "\">" +
                         "<span class = \"title\">" + title + "</span>" +
                         "<span class = \"meta type\">" + type + "</span>" + scoreSpan;
                     if ($("#role").text() == "mentor"){
@@ -55,7 +55,7 @@ $(function(){
            $.ajax({
                url: "CurriculumServlet",
                type: "POST",
-               data: {"id": $(this).attr("title"), "doPublish": "true"}
+               data: {"id": $(this).attr("name"), "doPublish": "true"}
            });
             var button = $(this);
             console.log(button.text());
@@ -79,7 +79,7 @@ $(function(){
                             $.ajax({
                                 url: "CurriculumServlet",
                                 type: "POST",
-                                data: {"id": $(this).attr("title"), "index": $(this).index(), "doPublish": "false"}
+                                data: {"id": $(this).attr("name"), "index": $(this).parent().index(), "doPublish": "false"}
                             })
                         });
                     }
@@ -90,25 +90,19 @@ $(function(){
     }
 
     function addTextPageLinks(){
-        $("#sortable form li").click(function(){
-            $(this).parent().submit();
+        var titles = $("#sortable form li .title");
+        titles.click(function(){
+            var inputData = $("<input>")
+                .attr("type", "hidden")
+                .attr("name", "id")
+                .attr("value", $(this).parent().attr("name"));
+            alert($(this).parent().attr("name"));
+            var form = $(this).parent().parent();
+            form.append(inputData);
+            form.submit();
         });
-    }
-
-    function addAssingmentPageLinks(){
-        $("#sortable li .button.assignment").click(function(){
-            $.ajax({
-                url : "./load-assignment-page",
-                type: "GET",
-                data: {"id": $(this).attr("title"), "role": $("#role").text()},
-                success: function(data){
-                    $("#sortable").empty();
-                    $("#content").append(data["text"]);
-                    var link = $("#redirect");
-                    link.attr("href", "./curriculum.jsp");
-                    link.text("Back to Curriculum Page");
-                }
-            });
+        titles.hover(function(){
+            $(this).css('cursor','pointer');
         });
     }
     loadPage();
