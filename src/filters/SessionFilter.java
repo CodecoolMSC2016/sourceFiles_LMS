@@ -19,11 +19,11 @@ public class SessionFilter implements Filter {
         HttpSession session = ((HttpServletRequest)req).getSession(false);
         HttpServletResponse response = (HttpServletResponse) resp;
         HttpServletRequest request = (HttpServletRequest) req;
-        if((session == null || session.getAttribute("name") == null) && request.getCookies() == null) {
+        if((session == null || session.getAttribute("name") == null)) {
             response.sendRedirect("./login.jsp");
-            return;
+        }else {
+            chain.doFilter(req, resp);
         }
-        chain.doFilter(req, resp);
     }
 
     public void init(FilterConfig config) throws ServletException {
