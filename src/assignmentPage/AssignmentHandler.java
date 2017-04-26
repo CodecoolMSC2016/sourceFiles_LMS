@@ -1,6 +1,7 @@
 package assignmentPage;
 
 import Users.User;
+import curriculum.CurriculumDataBaseHandler;
 import jdk.nashorn.internal.ir.Assignment;
 import org.codehaus.jackson.map.ObjectMapper;
 import registration.DataContainer;
@@ -22,7 +23,7 @@ import java.util.Set;
 urlPatterns = "/AssignmentHandler")
 public class AssignmentHandler extends HttpServlet {
 
-    private DataContainer container;
+    private CurriculumDataBaseHandler container = CurriculumDataBaseHandler.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,20 +31,24 @@ public class AssignmentHandler extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter(("content"));
         int maxScore = Integer.parseInt(request.getParameter("maxScore"));
-
-
-        Assignment assignment = new Assignment(title, content, false, maxScore, index);
+        try {
+            container.addAssignmentPage(title, content, maxScore);
+        }
+        catch (SQLException se) {
+            throw new RuntimeException(se);
+        }
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Set<Assignment> assignments = container.getAssignments();
+
+        Assignment assignment = container
 
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json");
-        objectMapper.writeValue(response.getOutputStream(), assignments);
+        objectMapper.writeValue(response.getOutputStream(), assignment);
 
     }
 }
