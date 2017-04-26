@@ -1,6 +1,8 @@
 import Users.Mentor;
 import Users.Student;
 import Users.User;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import registration.UserDataBaseHandler;
 import registration.registerException.EmailAlreadyExists;
@@ -22,7 +24,8 @@ class UserDataBaseHandlerTest
     private static final String DB_USER = "LMSDBManager";
     private static final String DB_PASSWORD = "szupertitkos";
 
-    private void init()
+    @AfterAll
+    private static void init() throws Exception
     {
         try
         {
@@ -31,9 +34,16 @@ class UserDataBaseHandlerTest
             generateDummyData();
         } catch (Exception e)
         {
-            e.printStackTrace();
-            fail("Everything is wrong!");
+            createUsersTable();
+            generateDummyData();
         }
+    }
+
+    @BeforeAll
+    private static void resetDBState() throws Exception
+    {
+        dropTable();
+        createUsersTable();
     }
 
     @Test
@@ -104,7 +114,7 @@ class UserDataBaseHandlerTest
         }
     }
 
-    private void createUsersTable() throws ClassNotFoundException, SQLException
+    private static void createUsersTable() throws ClassNotFoundException, SQLException
     {
         Statement stmt = null;
         String query = null;
@@ -121,7 +131,7 @@ class UserDataBaseHandlerTest
         sqlconn.close();
     }
 
-    private void dropTable() throws Exception
+    private static void dropTable() throws Exception
     {
         Statement stmt = null;
         String query = null;
@@ -133,7 +143,7 @@ class UserDataBaseHandlerTest
         sqlconn.close();
     }
 
-    private void generateDummyData() throws ClassNotFoundException, SQLException
+    private static void generateDummyData() throws ClassNotFoundException, SQLException
     {
         Statement stmt = null;
         String query = null;

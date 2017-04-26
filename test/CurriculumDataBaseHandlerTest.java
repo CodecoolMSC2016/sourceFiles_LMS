@@ -23,6 +23,7 @@ class CurriculumDataBaseHandlerTest
     private static final String DB_PASSWORD = "szupertitkos";
     private static final int listSizeafterDataGeneration = 7;
 
+    @BeforeAll
     private static void init() throws ClassNotFoundException, SQLException
     {
         try
@@ -41,10 +42,11 @@ class CurriculumDataBaseHandlerTest
 
     }
 
-    //@AfterAll
+    @AfterAll
     private static void afterTests() throws Exception
     {
         dropTables();
+        buildDummyDB();
         generateDummyData();
     }
 
@@ -116,14 +118,16 @@ class CurriculumDataBaseHandlerTest
 
     private static void dropTables() throws Exception
     {
-        Statement stmt = null;
-        String query = null;
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection sqlconn = DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
-        stmt = sqlconn.createStatement();
-        query = "DROP TABLE AssignmentPages, TextPages;";
-        stmt.execute(query);
-        sqlconn.close();
+        try{
+            Statement stmt = null;
+            String query = null;
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection sqlconn = DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
+            stmt = sqlconn.createStatement();
+            query = "DROP TABLE AssignmentPages, TextPages;";
+            stmt.execute(query);
+            sqlconn.close();
+        }catch (SQLException e){return;}
     }
 
 
