@@ -17,8 +17,6 @@
         <url-pattern>/profile.jsp</url-pattern>
         <url-pattern>/curriculum.jsp</url-pattern>
         <url-pattern>/userList.jsp</url-pattern>
-        <url-pattern>/profile.jsp</url-pattern>
         <url-pattern>/textPage.jsp</url-pattern>
-        <!--&lt;!&ndash;<url-pattern>./assingment.jsp</url-pattern>&ndash;&gt;-->
     </filter-mapping>
 </web-app>
