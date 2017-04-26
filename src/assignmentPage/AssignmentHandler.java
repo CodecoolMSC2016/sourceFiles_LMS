@@ -7,6 +7,8 @@ import curriculum.CurriculumDataBaseHandler;
 import jdk.nashorn.internal.ir.Assignment;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +28,13 @@ import java.util.Set;
 urlPatterns = "/load-assignment-page")
 public class AssignmentHandler extends HttpServlet {
 
-    private CurriculumDataBaseHandler dbHandler = CurriculumDataBaseHandler.getInstance();
+    private CurriculumDataBaseHandler dbHandler;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        dbHandler = CurriculumDataBaseHandler.getInstance();
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,20 +54,17 @@ public class AssignmentHandler extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String id = request.getParameter("id");
+        CurrciculumData assignment = dbHandler.getCurriculumData(id);
 
-        // Assigment assignment = dbHandler
+        if(assignment instanceof Assigment) {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        response.setContentType("application/json");
-
-        /*
-        if(request.getSession().getAttribute("role").equals("mentor")) {
-            objectMapper.writeValue(response.getOutputStream(), assignment);
+            request.setAttribute("title", assignment.getTitle());
+            request.setAttribute("text", assignment.getText());
+            request.setAttribute("maxScore", ((Assigment) assignment).getMaxScore() );
         }
-        else {
-        */
-
-        objectMapper.writeValue(response.getOutputStream(), "mukodik az assignment is");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./assignmet.jsp");
+        dispatcher.forward(request, response);
 
 
 

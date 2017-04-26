@@ -30,17 +30,19 @@
 <div class="container">
 
     <div>
-        <h1 class="jumbotron" id="mainheader">Assignment: </h1>
+        <h1 class="jumbotron" id="mainheader">Assignment: ${title}</h1>
     </div>
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <div>
-                <div id="assignment_content" class="list-group">
+                <div id="assignment_content">
+                    <p>${text}</p>
+                    <p>Max score: ${maxScore}</p>
                 </div>
             </div>
             <div>
-                <a href="./profile.jsp">Back to profile page</a>
+                <a href="./profile.jsp">Back to curriculum page</a>
             </div>
         </div>
         <div class="col-md-3"></div>
