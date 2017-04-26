@@ -15,27 +15,30 @@ $(function(){
                 for (var i = 0; i < data.length; i++){
                     scoreSpan = "";
                     var title = data[i].title;
+                    var servletUrl;
                     if (data[i].maxScore == undefined)
                     {
+                        servletUrl = "/load-text-page";
                         anchorClass = "button textpage";
                         type="Text page";
                     }
                     else {
+                        servletUrl = "/load-assignment-page";
                         anchorClass = "button assignment";
                         type = "Assignment";
                         scoreSpan = "<div title=\"" + data[i].id + "\" class=\"meta maxscore\">" + data[i].maxScore + "</div>";
 
                     }
                     var htmlString =
-                        "<a title=\"" + data[i].id + "\" class=\"" + anchorClass+ "\">" +
+                        "<form action=" + servletUrl + " method=\"GET\"><li title=\"" + data[i].id + "\" class=\"" + anchorClass+ "\">" +
                         "<span class = \"title\">" + title + "</span>" +
                         "<span class = \"meta type\">" + type + "</span>" + scoreSpan;
                     if ($("#role").text() == "mentor"){
                         var buttonTag = "<button class = \"btn btn-default btn-xs publishbutton\" title=\"" + data[i].id + "\">";
                         if (!data[i].published){
-                            htmlString += buttonTag + "Publish</button></a>";
+                            htmlString += buttonTag + "Publish</button></li></form>";
                         }else {
-                            htmlString += buttonTag + "Unpublish</button></a>";
+                            htmlString += buttonTag + "Unpublish</button></li></form>";
                         }
                     }
 
@@ -44,7 +47,7 @@ $(function(){
 
                 }
             }
-        }).then(addButtonEvents).then(makeSortable).then(addTextPageLinks).then(addAssingmentPageLinks);
+        }).then(addButtonEvents).then(makeSortable).then(addTextPageLinks);
     }
     function addButtonEvents(){
         $("button").click(function(){
@@ -72,7 +75,7 @@ $(function(){
                 $( "#sortable" ).sortable({
                     stop: function() {
                         var order = [];
-                        $("#sortable a").each(function(){
+                        $("#sortable form li").each(function(){
                             $.ajax({
                                 url: "CurriculumServlet",
                                 type: "POST",
@@ -87,24 +90,13 @@ $(function(){
     }
 
     function addTextPageLinks(){
-        $("#sortable a .button.textpage").click(function(){
-           $.ajax({
-               url : "./load-text-page",
-               type: "GET",
-               data: {"id": $(this).attr("title"), "role": $("#role").text()},
-               success: function(data) {
-                   $("#sortable").empty();
-                   $("#content").append(data["text"]);
-                   var link = $("#redirect");
-                   link.attr("href", "./curriculum.jsp");
-                   link.text("Back to Curriculum Page");
-               }
-           });
+        $("#sortable form li").click(function(){
+            $(this).parent().submit();
         });
     }
 
     function addAssingmentPageLinks(){
-        $("#sortable a .button.assignment").click(function(){
+        $("#sortable li .button.assignment").click(function(){
             $.ajax({
                 url : "./load-assignment-page",
                 type: "GET",
