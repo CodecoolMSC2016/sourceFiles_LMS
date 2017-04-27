@@ -37,6 +37,7 @@ public class RegistrationHandler extends HttpServlet {
         {
             //Needs to be handled correctly
             e.printStackTrace();
+            response.sendError(500, "There was an error during database operations");
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("./register.jsp");
         dispatcher.forward(request, response);
