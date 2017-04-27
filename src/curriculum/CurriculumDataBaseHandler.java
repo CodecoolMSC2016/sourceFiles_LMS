@@ -86,31 +86,35 @@ public class CurriculumDataBaseHandler {
     }
 
 
-    public void addAssigmentPage(String title,String text,int maxScore)throws SQLException{
+    public String addAssigmentPage(String title,String text,int maxScore)throws SQLException{
         int index = getCurrciculumDataList().size() + 1;
         query = "INSERT INTO AssignmentPages(ID,PosIndex,Title,Content,MaxScore,Published)" +
                 "VALUES(?,?,?,?,?,?)";
+        String uniqueId = UUID.randomUUID().toString();
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setString(1, UUID.randomUUID().toString());
+        ps.setString(1, uniqueId);
         ps.setInt(2,index);
         ps.setString(3,title);
         ps.setString(4,text);
         ps.setInt(5,maxScore);
         ps.setBoolean(6,false);
         ps.executeUpdate();
+        return uniqueId;
     }
 
-    public void addTextPage(String title,String text,int maxScore)throws SQLException{
+    public String addTextPage(String title,String text,int maxScore)throws SQLException{
         int index = getCurrciculumDataList().size() + 1;
         query = "INSERT INTO TextPages(ID,PosIndex,Title,Content,Published)" +
                 "VALUES(?,?,?,?,?)";
+        String uniqueId = UUID.randomUUID().toString();
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setString(1, UUID.randomUUID().toString());
+        ps.setString(1, uniqueId);
         ps.setInt(2,index);
         ps.setString(3,title);
         ps.setString(4,text);
         ps.setBoolean(5,false);
         ps.executeUpdate();
+        return uniqueId;
     }
 
     public void changeIndex(String id,int index)throws SQLException{
