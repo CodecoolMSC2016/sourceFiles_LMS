@@ -76,6 +76,7 @@ public class CurriculumServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+
         String title = req.getParameter("title");
         String content = req.getParameter("content");
         try

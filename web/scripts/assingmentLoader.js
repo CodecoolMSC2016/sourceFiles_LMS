@@ -30,16 +30,18 @@ $(function(){
 
                     }
                     var htmlString =
-                        "<form action=" + servletUrl + " method=\"GET\"><li name=\"" + data[i].id + "\" class=\"" + anchorClass+ "\">" +
-                        "<span class = \"title\">" + title + "</span>" +
+                        "<li name=\"" + data[i].id + "\" class=\"" + anchorClass+ "\"><form action=" + servletUrl + " method=\"GET\">" +
+                        "<span class = \"title\">" + title + "</span></form>" +
                         "<span class = \"meta type\">" + type + "</span>" + scoreSpan;
                     if ($("#role").text() == "mentor"){
-                        var buttonTag = "<button class = \"btn btn-default btn-xs publishbutton\" title=\"" + data[i].id + "\">";
+                        var buttonTag = "<button class = \"btn btn-default btn-xs publishbutton\" name=\"" + data[i].id + "\">";
                         if (!data[i].published){
-                            htmlString += buttonTag + "Publish</button></li></form>";
+                            htmlString += buttonTag + "Publish</button></li>";
                         }else {
-                            htmlString += buttonTag + "Unpublish</button></li></form>";
+                            htmlString += buttonTag + "Unpublish</button></li>";
                         }
+                    }else {
+                        $("#accordion").hide();
                     }
 
                     pageContets[data[i].id] = data[i].text;
@@ -50,10 +52,10 @@ $(function(){
         }).then(addButtonEvents).then(makeSortable).then(addTextPageLinks);
     }
     function addButtonEvents(){
-        $("button").click(function(){
+        $(".publishbutton").click(function(){
 
            $.ajax({
-               url: "CurriculumServlet",
+               url: "./CurriculumServlet",
                type: "POST",
                data: {"id": $(this).attr("name"), "doPublish": "true"}
            });
@@ -75,35 +77,76 @@ $(function(){
                 $( "#sortable" ).sortable({
                     stop: function() {
                         var order = [];
-                        $("#sortable form li").each(function(){
+                        $("#sortable li").each(function(){
                             $.ajax({
                                 url: "CurriculumServlet",
                                 type: "POST",
-                                data: {"id": $(this).attr("name"), "index": $(this).parent().index(), "doPublish": "false"}
+                                data: {"id": $(this).attr("name"), "index": $(this).index(), "doPublish": "false"}
                             })
                         });
                     }
                 });
                 $( "#sortable" ).disableSelection();
-            } );
+            });
         }
     }
 
     function addTextPageLinks(){
-        var titles = $("#sortable form li .title");
+        var titles = $("#sortable li form  .title");
         titles.click(function(){
             var inputData = $("<input>")
                 .attr("type", "hidden")
                 .attr("name", "id")
-                .attr("value", $(this).parent().attr("name"));
-            alert($(this).parent().attr("name"));
-            var form = $(this).parent().parent();
+                .attr("value", $(this).parent().parent().attr("name"));
+            var form = $(this).parent();
             form.append(inputData);
             form.submit();
         });
         titles.hover(function(){
             $(this).css('cursor','pointer');
         });
+        addSubmitButtonActions();
     }
+
+    function addSubmitButtonActions(){
+        $("#submitAssignment").click(function(){
+           $.ajax({
+               url: "./add-content",
+               type: "POST",
+               data: {"title": $("#assignmentTitle").val(), "content": $("#assignmentContent").val(), "type": "assignment", "maxScore": $("#assignmentScore").val()},
+               success: function(id){
+                   var assignmentHtml =
+                       "<li name=\"" + id + "\" class=\"button assignment\"><form action=\"/load-assignment-page\" method=\"GET\">" +
+                       "<span class = \"title\">" + $("#assignmentTitle").val() + "</span></form>" +
+                       "<span class = \"meta type\">Assignment</span>" +
+                       "<button class = \"btn btn-default btn-xs publishbutton\" name=\"" + id+ "\">" +
+                       "Publish</button></li>";
+                    $("#sortable").append(assignmentHtml);
+                    $('#collapse2').collapse("hide");
+                    addTextPageLinks()
+               }
+           });
+        });
+        $("#submitText").click(function(){
+            $.ajax({
+                url: "./add-content",
+                type: "POST",
+                data: {"title": $("#textTitle").val(), "content": $("#textContent").val(), "type": "text"},
+                success: function(id){
+                    var textHtml =
+                        "<li name=\"" + id + "\" class=\"button textpage\"><form action=\"/load-text-page\" method=\"GET\">" +
+                        "<span class = \"title\">" + $("#textTitle").val() + "</span></form>" +
+                        "<span class = \"meta type\">Text Page</span>" +
+                        "<button class = \"btn btn-default btn-xs publishbutton\" name=\"" + id+ "\">" +
+                        "Publish</button></li>";
+                    $("#sortable").append(textHtml);
+                    $('#collapse1').collapse("hide");
+                    addTextPageLinks()
+                }
+            });
+        });
+    }
+    $('#collapse2').collapse("hide");
+    $('#collapse1').collapse("hide");
     loadPage();
 });
