@@ -63,7 +63,7 @@ public class AssignmentHandler extends HttpServlet {
             request.setAttribute("text", assignment.getText());
             request.setAttribute("maxScore", ((Assigment) assignment).getMaxScore() );
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./assignmet.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./assignment.jsp");
         dispatcher.forward(request, response);
 
 

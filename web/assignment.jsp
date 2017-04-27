@@ -37,12 +37,21 @@
         <div class="col-md-6">
             <div>
                 <div id="assignment_content">
-                    <p>${text}</p>
+                    <blockquote>${text}</blockquote>
                     <p>Max score: ${maxScore}</p>
+                    <form>
+                        <input type="text" name="solution">
+                        <input type="submit" value="Submit">
+                        <div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <input type="file" id="exampleInputFile">
+                            <p class="help-block">You can upload a file with your solution.</p>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div>
-                <a href="./profile.jsp">Back to curriculum page</a>
+                <a href="./curriculum.jsp">Back to curriculum page</a>
             </div>
         </div>
         <div class="col-md-3"></div>
@@ -50,7 +59,7 @@
     <p id="role" style="visibility: hidden;"><%=role%></p>
 
 </div>
-<script src="./scripts/assignments.js"></script>
+<script src="./scripts/assignmentLoader.js"></script>
 
 
 </body>
