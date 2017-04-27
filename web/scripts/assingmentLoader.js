@@ -40,6 +40,8 @@ $(function(){
                         }else {
                             htmlString += buttonTag + "Unpublish</button></li>";
                         }
+                    }else {
+                        $("#accordion").hide();
                     }
 
                     pageContets[data[i].id] = data[i].text;
@@ -53,7 +55,7 @@ $(function(){
         $(".publishbutton").click(function(){
 
            $.ajax({
-               url: "CurriculumServlet",
+               url: "./CurriculumServlet",
                type: "POST",
                data: {"id": $(this).attr("name"), "doPublish": "true"}
            });
@@ -96,7 +98,6 @@ $(function(){
                 .attr("type", "hidden")
                 .attr("name", "id")
                 .attr("value", $(this).parent().parent().attr("name"));
-            alert($(this).parent().parent().attr("name"));
             var form = $(this).parent();
             form.append(inputData);
             form.submit();
@@ -110,19 +111,42 @@ $(function(){
     function addSubmitButtonActions(){
         $("#submitAssignment").click(function(){
            $.ajax({
-               url: "./testszar",
+               url: "./add-content",
                type: "POST",
-               data: {"title": $("#assignmentTitle").val(), "content": $("#assignmentContent").val(), "type": "assignment", "maxScore": $("#assignmentScore").val()}
+               data: {"title": $("#assignmentTitle").val(), "content": $("#assignmentContent").val(), "type": "assignment", "maxScore": $("#assignmentScore").val()},
+               success: function(id){
+                   var assignmentHtml =
+                       "<li name=\"" + id + "\" class=\"button assignment\"><form action=\"/load-assignment-page\" method=\"GET\">" +
+                       "<span class = \"title\">" + $("#assignmentTitle").val() + "</span></form>" +
+                       "<span class = \"meta type\">Assignment</span>" +
+                       "<button class = \"btn btn-default btn-xs publishbutton\" name=\"" + id+ "\">" +
+                       "Publish</button></li>";
+                    $("#sortable").append(assignmentHtml);
+                    $('#collapse2').collapse("hide");
+                    addTextPageLinks()
+               }
            });
         });
         $("#submitText").click(function(){
             $.ajax({
-                url: "./testszar",
+                url: "./add-content",
                 type: "POST",
-                data: {"title": $("#textTitle").val(), "content": $("#textContent").val(), "type": "text"}
+                data: {"title": $("#textTitle").val(), "content": $("#textContent").val(), "type": "text"},
+                success: function(id){
+                    var textHtml =
+                        "<li name=\"" + id + "\" class=\"button textpage\"><form action=\"/load-text-page\" method=\"GET\">" +
+                        "<span class = \"title\">" + $("#textTitle").val() + "</span></form>" +
+                        "<span class = \"meta type\">Text Page</span>" +
+                        "<button class = \"btn btn-default btn-xs publishbutton\" name=\"" + id+ "\">" +
+                        "Publish</button></li>";
+                    $("#sortable").append(textHtml);
+                    $('#collapse1').collapse("hide");
+                    addTextPageLinks()
+                }
             });
         });
     }
+    $('#collapse2').collapse("hide");
     $('#collapse1').collapse("hide");
     loadPage();
 });
