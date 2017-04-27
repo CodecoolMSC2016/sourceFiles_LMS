@@ -28,8 +28,8 @@
         <h1 class="jumbotron" id="mainheader">${title}</h1>
     </div>
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
             <div id="content">
                 <blockquote>${text}</blockquote>
             </div>
@@ -37,7 +37,7 @@
                 <a href="./curriculum.jsp">Back to Curriculum Page</a>
             </div>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
     </div>
     <p id="role" style="visibility: hidden;"><%=role%></p>
 
