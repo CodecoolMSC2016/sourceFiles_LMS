@@ -30,11 +30,11 @@
             <h1 class="jumbotron" id="mainheader">Welcome to the Curriculum overview page, <%=name%>.</h1>
         </div>
         <div class="row">
-            <div class="col-md-3"></div>
+            <div class="col-md-3">
+            </div>
             <div class="col-md-6">
                 <div id="content">
-                    <h2 id="assheader">Current assignments:</h2>
-                    <div id="sortable" class="list-group"></div>
+                    <%--<h2 id="assheader">Current assignments:</h2>--%>
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -73,6 +73,7 @@
                             </div>
                         </div>
                     </div>
+                    <div id="sortable" class="list-group"></div>
                 <div>
                     <a href="./profile.jsp">Back to profile page</a>
                 </div>
