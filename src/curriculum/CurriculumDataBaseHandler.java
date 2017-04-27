@@ -100,7 +100,7 @@ public class CurriculumDataBaseHandler {
         ps.executeUpdate();
     }
 
-    public void addTextPage(String title,String text,int maxScore)throws SQLException{
+    public void addTextPage(String title,String text)throws SQLException{
         int index = getCurrciculumDataList().size() + 1;
         query = "INSERT INTO TextPages(ID,PosIndex,Title,Content,Published)" +
                 "VALUES(?,?,?,?,?)";
