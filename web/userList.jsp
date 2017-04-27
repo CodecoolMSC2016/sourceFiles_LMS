@@ -32,6 +32,7 @@
         <div class="col-md-6">
             <div>
                 <div id="sortable" class="list-group">
+                    ${registeredUsers}
                 </div>
             </div>
             <div>
@@ -44,7 +45,6 @@
 
 </div>
 
-<script src="./scripts/userList.js"></script>
 
 </body>
 </html>

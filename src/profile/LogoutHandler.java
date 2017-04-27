@@ -8,9 +8,7 @@ import java.io.IOException;
 /**
  * Created by imre_meszesan on 10.04.17.
  */
-@WebServlet(name = "LogoutHandler",
-    urlPatterns = "/LogoutHandler"
-)
+
 public class LogoutHandler extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

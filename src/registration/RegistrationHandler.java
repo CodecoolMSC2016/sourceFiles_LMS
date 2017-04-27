@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-@WebServlet("/RegistrationHandler")
 public class RegistrationHandler extends HttpServlet {
     private UserDataBaseHandler container;
     private String abspath;

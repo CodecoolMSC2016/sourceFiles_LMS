@@ -24,8 +24,7 @@ import java.util.Set;
 /**
  * Created by trixi on 2017.04.24..
  */
-@WebServlet(name = "AssignmentHandler",
-urlPatterns = "/load-assignment-page")
+
 public class AssignmentHandler extends HttpServlet {
 
     private CurriculumDataBaseHandler dbHandler;

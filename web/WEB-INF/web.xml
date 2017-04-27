@@ -7,6 +7,80 @@
     <welcome-file-list>
         <welcome-file>/profile.jsp</welcome-file>
     </welcome-file-list>
+    
+    <servlet>
+        <servlet-name>UserListHandler</servlet-name>
+        <servlet-class>profile.UserListHandler</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AssignmentHandler</servlet-name>
+        <servlet-class>assignmentPage.AssignmentHandler</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CurriculumServlet</servlet-name>
+        <servlet-class>curriculum.CurriculumServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginHandler</servlet-name>
+        <servlet-class>login.LoginHandler</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileHandler</servlet-name>
+        <servlet-class>profile.ProfileHandler</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutHandler</servlet-name>
+        <servlet-class>profile.LogoutHandler</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistrationHandler</servlet-name>
+        <servlet-class>registration.RegistrationHandler</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TextPageServlet</servlet-name>
+        <servlet-class>textPage.TextPageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContentHandler</servlet-name>
+        <servlet-class>curriculum.ContentHandler</servlet-class>
+    </servlet>
+    
+     <servlet-mapping>
+         <servlet-name>LoginHandler</servlet-name>
+         <url-pattern>/LoginHandler</url-pattern>
+     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrationHandler</servlet-name>
+        <url-pattern>/RegistrationHandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CurriculumServlet</servlet-name>
+        <url-pattern>/CurriculumServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TextPageServlet</servlet-name>
+        <url-pattern>/load-text-page</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileHandler</servlet-name>
+        <url-pattern>/ProfileHandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutHandler</servlet-name>
+        <url-pattern>/LogoutHandler</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssignmentHandler</servlet-name>
+        <url-pattern>/load-assignment-page</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContentHandler</servlet-name>
+        <url-pattern>/add-content</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserListHandler</servlet-name>
+        <url-pattern>/UserListHandler</url-pattern>
+    </servlet-mapping>
 
     <filter>
         <filter-name>SessionFilter</filter-name>

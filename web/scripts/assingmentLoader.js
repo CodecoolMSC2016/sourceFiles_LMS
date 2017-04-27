@@ -18,12 +18,12 @@ $(function(){
                     var servletUrl;
                     if (data[i].maxScore == undefined)
                     {
-                        servletUrl = "/load-text-page";
+                        servletUrl = "./load-text-page";
                         anchorClass = "button textpage";
                         type="Text page";
                     }
                     else {
-                        servletUrl = "/load-assignment-page";
+                        servletUrl = "./load-assignment-page";
                         anchorClass = "button assignment";
                         type = "Assignment";
                         scoreSpan = "<div title=\"" + data[i].id + "\" class=\"meta maxscore\">" + data[i].maxScore + "</div>";

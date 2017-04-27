@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
-@WebServlet("/ProfileHandler")
 public class ProfileHandler extends HttpServlet {
     private UserDataBaseHandler container;
 

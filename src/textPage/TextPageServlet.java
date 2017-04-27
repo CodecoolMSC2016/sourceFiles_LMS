@@ -16,10 +16,8 @@ import java.io.IOException;
 
 /**
  * Created by imre_meszesan on 24.04.17.
+
  */
-@WebServlet(name = "TextPageServlet",
-    urlPatterns = "/load-text-page"
-)
 public class TextPageServlet extends HttpServlet {
     private CurriculumDataBaseHandler dbHandler;
     @Override
