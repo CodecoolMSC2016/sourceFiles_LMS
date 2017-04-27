@@ -76,6 +76,21 @@ public class CurriculumServlet extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-
+        String title = req.getParameter("title");
+        String content = req.getParameter("content");
+        try
+        {
+            if (req.getParameter("type").equals("assignment"))
+            {
+                int maxScore = Integer.parseInt(req.getParameter("maxScore"));
+                DBHandler.addAssigmentPage(title, content, maxScore);
+            } else
+            {
+                DBHandler.addTextPage(title, content, 0);
+            }
+        }catch (SQLException e)
+        {
+            resp.sendError(500, "There was an error during database operations");
+        }
     }
 }
