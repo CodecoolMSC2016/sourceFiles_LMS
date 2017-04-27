@@ -46,6 +46,7 @@ public class AssignmentHandler extends HttpServlet {
             dbHandler.addAssigmentPage(title, content, maxScore);
         }
         catch (SQLException se) {
+            response.sendRedirect("There was an error during database operations");
             throw new RuntimeException(se);
         }
 
