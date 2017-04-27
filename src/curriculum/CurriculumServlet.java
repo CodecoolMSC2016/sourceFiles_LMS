@@ -48,6 +48,7 @@ public class CurriculumServlet extends HttpServlet {
                 {
                     // Needs to be handled properly.
                     exception.printStackTrace();
+                    response.sendError(500, "There was an error during database operations");
                 }
             }
         }

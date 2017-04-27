@@ -44,8 +44,8 @@ public class LoginHandler extends HttpServlet
         }
         catch (SQLException e)
         {
-            //Needs to be handled properly
             e.printStackTrace();
+            response.sendError(500, "There was an error during database operations");
         }
         String userName = loggedIn.getName();
         userName = userName.replaceAll(" ", ":");
