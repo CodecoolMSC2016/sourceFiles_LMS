@@ -43,10 +43,10 @@
                                         Add Text Page</a>
                                 </h4>
                             </div>
-                            <div id="collapse1" class="panel-collapse collapse in" style="text-align:center;">
+                            <div id="collapse1" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     Text Page Title:<br>
-                                    <input id="textTitle" class="input-title" type="text"><br>
+                                    <input id="textTitle" class="input-title" maxlength="45" type="text"><br>
                                     Text Page Content:<br>
                                     <textarea id="textContent" rows="10" cols="60"></textarea><br>
                                     <button id="submitText">Submit</button>
@@ -56,18 +56,18 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" style="text-align:center;">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
                                         Add Assignment Page</a>
                                 </h4>
                             </div>
                             <div id="collapse2" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     Assignment Page Title:<br>
-                                    <input id="assignmentTitle" class="input-title" type="text"><br>
+                                    <input id="assignmentTitle" class="input-title" maxlength="45" type="text"><br>
                                     Assignment Page Content:<br>
-                                    <textarea id="assignmentContent" rows="10" cols="60"></textarea><br>
+                                    <textarea id="assignmentContent" rows="10"  cols="60"></textarea><br>
                                     Maximum Score:<br>
-                                    <input id="assignmentScore" class="input-title" type="text" placeholder="0"><br>
+                                    <input id="assignmentScore" class="input-title" type="number" max="127" placeholder="0"><br>
                                     <button id="submitAssignment">Submit</button>
                                 </div>
                             </div>
