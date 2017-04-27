@@ -23,8 +23,22 @@ class UserDataBaseHandlerTest
     private static final String DATABASE = "jdbc:mysql://192.168.150.39:3306/LMS?useSSL=true";
     private static final String DB_USER = "LMSDBManager";
     private static final String DB_PASSWORD = "szupertitkos";
+    private final int initialDBSize = 3;
 
     @AfterAll
+    private static void resetDBState() throws Exception
+    {
+        try
+        {
+            dropTable();
+            createUsersTable();
+        } catch (Exception e)
+        {
+            createUsersTable();
+        }
+    }
+
+    @BeforeAll
     private static void init() throws Exception
     {
         try
@@ -32,18 +46,11 @@ class UserDataBaseHandlerTest
             dropTable();
             createUsersTable();
             generateDummyData();
-        } catch (Exception e)
+        }catch(Exception e)
         {
             createUsersTable();
             generateDummyData();
         }
-    }
-
-    @BeforeAll
-    private static void resetDBState() throws Exception
-    {
-        dropTable();
-        createUsersTable();
     }
 
     @Test
@@ -56,7 +63,7 @@ class UserDataBaseHandlerTest
             {
                 System.out.println(user.toString());
             }
-        assertEquals(5, users.size());
+        assertEquals(initialDBSize, users.size());
         }catch (SQLException exception){
             fail(exception.getMessage());
     }
@@ -70,7 +77,7 @@ class UserDataBaseHandlerTest
         {
             UserDataBaseHandler udbh = UserDataBaseHandler.getInstance();
             udbh.addUser("Feco","e@mail.com","student");
-            assertEquals(5, udbh.getRegisteredUsers().size());
+            assertEquals(initialDBSize+1, udbh.getRegisteredUsers().size());
         }catch(SQLException e)
         {
             fail(e.getMessage());
@@ -138,7 +145,7 @@ class UserDataBaseHandlerTest
         Class.forName("com.mysql.jdbc.Driver");
         Connection sqlconn = DriverManager.getConnection(DATABASE, DB_USER, DB_PASSWORD);
         stmt = sqlconn.createStatement();
-        query = "DROP TABLE Users, AssignmentPages, TextPages;";
+        query = "DROP TABLE Users;";
         stmt.execute(query);
         sqlconn.close();
     }
