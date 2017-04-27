@@ -1,6 +1,9 @@
 package profile;
 
 import Users.User;
+import jdk.nashorn.api.scripting.JSObject;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.util.JSONPObject;
 import registration.UserDataBaseHandler;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,17 +28,34 @@ import java.util.Set;
     urlPatterns = "/UserListHandler"
 )
 public class UserListHandler extends HttpServlet {
-    UserDataBaseHandler container;
+    UserDataBaseHandler dbHandler;
     Set<User> studentSet;
 
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        container = UserDataBaseHandler.getInstance();
-        studentSet = new HashSet<>();
+        dbHandler = UserDataBaseHandler.getInstance();
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.setContentType("application/json");
+
+        try {
+            objectMapper.writeValue(response.getOutputStream(), dbHandler.getRegisteredUsers());
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
+
+}
+
+    /*
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Set<User> registeredUsers = null;
         try
@@ -93,3 +115,4 @@ public class UserListHandler extends HttpServlet {
         dispatcher.forward(request, response);
     }
 }
+*/

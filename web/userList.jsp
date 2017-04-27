@@ -31,7 +31,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <div>
-                <div id="sortable" class="list-group">${registeredUsers}
+                <div id="sortable" class="list-group">
                 </div>
             </div>
             <div>
@@ -43,6 +43,8 @@
     <p id="role" style="visibility: hidden;"><%=role%></p>
 
 </div>
+
+<script src="./scripts/userList.js"></script>
 
 </body>
 </html>
