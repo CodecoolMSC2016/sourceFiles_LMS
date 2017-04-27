@@ -1,3 +1,13 @@
+/*
+ * re: https://twitter.com/CodePen/status/355107665099231232
+ *
+ * this version uses <i> for the icons; this is the first time i've constructed icons out of pure css using pseudo elements (MUCH more on that here: http://css-tricks.com/pseudo-element-roundup/ )
+ *
+ * next version(s) might substitute the <i>s with @fontface & unicode range; i'd like to also try to get more semantic with this (though i think this is pretty semantic to start with... no? maybe not); i'd also like to get this modernizr'd and compatible way back to ie version who-knows-what
+ *
+ * feel free to hit me up w/criticisms @ jeremy.buller@gmail.com
+ */
+
 *,
 *:before,
 *:after {
@@ -5,16 +15,11 @@
 }
 
 body {
-    background: #fff;
+    background: #e1e1e1;
     padding: 1em;
     font: normal normal normal 12px/1.333 'Helvetica Neue', arial, sans-serif;
     font-size: .75rem;
     color: #95979d;
-}
-
-h1 {
-    text-align: center;
-    font-weight: bolder;
 }
 
 .button {
@@ -35,7 +40,7 @@ h1 {
             inset -2em 0 0 -.3em rgba(0, 0, 0, .05);
 }
 
-.mentor {
+.assignment {
     box-shadow:
             0 .0625em .125em rgba(0, 0, 0, .125),
             inset 0 -.25em 0 -.125em rgba(0, 0, 0, .125),
@@ -43,7 +48,7 @@ h1 {
             inset -2em 0 0 -.3em rgba(0, 0, 0, .05);
 }
 
-.student {
+.textpage {
     box-shadow:
             0 .0625em .125em rgba(0, 0, 0, .125),
             inset 0 -.25em 0 -.125em rgba(0, 0, 0, .125),
@@ -53,7 +58,6 @@ h1 {
 
 .title {
     font-weight: bold;
-    font-size: 2.5em;
     color: #000;
     display: block;
     white-space: nowrap;
@@ -72,17 +76,20 @@ h1 {
     margin-left: .25em;
 }
 
-.expiry {
-    font-size: 8px;
-    font-size: 2em;
-    line-height: 2; /* 16 "px" */
-    font-weight: bold;
-}
-
 .type
 {
-    font-size: 2em;
+    font-size: .7em;
     line-height: 2; /* 16 "px" */
+}
+
+.maxscore {
+    position: absolute;
+    font-family: sans-serif;
+    font-size: 2em;
+    right: 1.125em;
+    top: 0;
+    margin: auto;
+    line-height: 2.083; /* 50 "px", should be same as button height */
 }
 
 .chevron {
@@ -118,37 +125,7 @@ h1 {
     bottom: 0;
     box-shadow: inset .25em .125em .125em -.125em rgba(0, 0, 0, .25);
 }
-
-
-#userphoto {
-    display: block;
-    float: right;
-    margin-left: 10px;
-    margin-bottom: 8px;
-}
-img {
-    max-width: 100%;
-    border: 0;
-    cursor: pointer;
-}
-
-#popup{
-    position: absolute;
-    margin: auto;
-    margin-top: 17%;
-    margin-left: 34%;
-    padding: 15px;
-    width: 400px;
-    height: 220px;
-    text-align: center;
-    border-radius: 2%;
-    color: slategrey;
-    background-color: rgba(255,255,255,0.9);
-}
-#pp {
-    font-size: 1em;
-}
-a {
-    position: relative;
-    left: 94%;
+.publishbutton
+{
+    vertical-align: middle;
 }
