@@ -140,7 +140,6 @@ $(function(){
                         "Publish</button></li>";
                     $("#sortable").append(textHtml);
                     $('#collapse1').collapse("hide");
-                    addTextPageLinks()
                 }
             });
         });
