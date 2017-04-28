@@ -123,7 +123,6 @@ $(function(){
                        "Publish</button></li>";
                     $("#sortable").append(assignmentHtml);
                     $('#collapse2').collapse("hide");
-                    addTextPageLinks()
                }
            });
         });
