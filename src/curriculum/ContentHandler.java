@@ -16,8 +16,6 @@ public class ContentHandler extends HttpServlet {
 
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        System.out.println("TITLE: " + title);
-        System.out.println("CONTENT: " + content);
         String uniqueId;
         try
         {
